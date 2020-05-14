@@ -18,10 +18,10 @@ dom.watch()
 
 @Component({
   selector: 'app-about',
-  templateUrl: './about.component.html',
-  styleUrls: ['./about.component.scss']
+  templateUrl: './mass-assignment.component.html',
+  styleUrls: ['./mass-assignment.component.scss']
 })
-export class AboutComponent implements OnInit {
+export class MassAssignmentComponent implements OnInit {
 
   public twitterUrl?: string
   public facebookUrl?: string
