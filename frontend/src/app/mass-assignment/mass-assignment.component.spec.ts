@@ -14,7 +14,6 @@ xdescribe('MassAssignmentComponent', () => {
   let fixture: ComponentFixture<MassAssignmentComponent>
 
   beforeEach(async(() => {
-
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
