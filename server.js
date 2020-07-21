@@ -171,6 +171,15 @@ app.use('/.well-known/security.txt', securityTxt({
   acknowledgements: config.get('application.securityTxt.acknowledgements')
 }))
 
+app.use(function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*')
+
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
+  next();
+});
+
 /* robots.txt */
 app.use(robots({ UserAgent: '*', Disallow: '/ftp' }))
 
