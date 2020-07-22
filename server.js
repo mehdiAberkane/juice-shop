@@ -140,8 +140,8 @@ app.locals.abused_ssrf_bug = false
 app.use(compression())
 
 /* Bludgeon solution for possible CORS problems: Allow everything! */
-//app.options('*', cors())
-//app.use(cors())
+app.options('*', cors())
+app.use(cors())
 
 /* Security middleware */
 app.use(helmet.noSniff())
@@ -172,7 +172,7 @@ app.use('/.well-known/security.txt', securityTxt({
 }))
 
 app.use(function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Origin', 'https://www.dealabs.com/')
   res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
   res.setHeader("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
   next();
