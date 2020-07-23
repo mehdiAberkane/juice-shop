@@ -47,7 +47,10 @@ const metrics = require('./routes/metrics')
 const authenticatedUsers = require('./routes/authenticatedUsers')
 const currentUser = require('./routes/currentUser')
 const login = require('./routes/login')
+/* AG2R route */
 const massAssignment = require('./routes/massAssignment')
+const contactPage = require('./routes/contactPage')
+
 const changePassword = require('./routes/changePassword')
 const resetPassword = require('./routes/resetPassword')
 const securityQuestion = require('./routes/securityQuestion')
@@ -496,7 +499,6 @@ for (const { name, exclude } of autoModels) {
 }
 
 /* Custom Restful API */
-app.get('/rest/mass-assignment', massAssignment())
 app.post('/rest/user/login', login())
 app.get('/rest/user/change-password', changePassword())
 app.post('/rest/user/reset-password', resetPassword())
@@ -554,6 +556,10 @@ app.get('/video', videoHandler.getVideo())
 /* Routes for profile page */
 app.get('/profile', insecurity.updateAuthenticatedUsers(), userProfile())
 app.post('/profile', updateUserProfile())
+
+/* Custom Restful API for AG2R */
+app.get('/rest/mass-assignment', massAssignment())
+app.get('/rest/contact', contactPage())
 
 app.use(angular())
 
