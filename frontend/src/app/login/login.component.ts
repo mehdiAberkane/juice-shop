@@ -18,21 +18,6 @@ import { ConfigurationService } from '../Services/configuration.service'
 library.add(faKey, faEye, faEyeSlash, faGoogle)
 dom.watch()
 
-//const xhr = new XMLHttpRequest()
-//xhr.open('GET', 'https://www.dealabs.com/', false)
-//xhr.send()
-
-var req = new XMLHttpRequest()
-req.onload = reqListener
-req.open('get','https://www.dealabs.com/',true)
-req.withCredentials = true
-req.send()
-
-function reqListener() {
-  console.log('reponse')
-  console.log(this.responseText)
-}
-
 const oauthProviderUrl = 'https://accounts.google.com/o/oauth2/v2/auth'
 
 @Component({
