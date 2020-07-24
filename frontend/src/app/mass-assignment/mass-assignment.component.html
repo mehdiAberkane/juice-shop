@@ -5,8 +5,42 @@
 
 <div fxLayoutAlign="center">
   <mat-card class="mat-elevation-z6">
-    <section class="about-us">
-      <h1>Update Profile</h1>
+    <section class="mass-as">
+      <h1>Contact pour AG2R La mondiale</h1>
+
+      <div class="form-container" id="feedback-form">
+  
+        <mat-form-field appearance="outline" color="accent">
+          <mat-label translate>LABEL_AUTHOR</mat-label>
+          <input matInput type="text" aria-label="Field with the name of the author">
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" color="accent">
+          <mat-label translate>LABEL_COMMENT</mat-label>
+          <mat-hint translate>
+            <i class="fas fa-exclamation-circle"></i>
+            <em style="margin-left:5px;" translate>{{ 'MAX_TEXTAREA_LENGTH' | translate: {length: '160'} }}</em>
+          </mat-hint>
+          <textarea #comment id="comment" [formControl]="feedbackControl" matInput
+                    matAutosizeMinRows="4" matAutosizeMaxRows="4" matTextareaAutosize cols="50" maxlength="160"
+                    placeholder="{{ 'WRITE_REVIEW_PLACEHOLDER' | translate}}"
+                    aria-label="Field for entering the comment or the feedback"></textarea>
+          <mat-hint align="end">{{comment.value?.length || 0}}/160</mat-hint>
+          <mat-error *ngIf="feedbackControl.invalid && feedbackControl.errors.required" translate>MANDATORY_COMMENT
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" color="accent">
+          <mat-label translate>LABEL_RESULT</mat-label>
+        </mat-form-field>
+      </div>
+      <button type="submit" id="submitButton" mat-raised-button color="primary"
+              [disabled]="feedbackControl.invalid"
+              (click)="save()" aria-label="Button to send the review">
+        <i class="material-icons">
+          send
+        </i>
+        {{'BTN_SUBMIT' | translate}}
+      </button>
     </section>
   </mat-card>
 </div>

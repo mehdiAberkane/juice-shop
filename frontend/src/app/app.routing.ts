@@ -41,6 +41,8 @@ import { DeliveryMethodComponent } from './delivery-method/delivery-method.compo
 import { PhotoWallComponent } from './photo-wall/photo-wall.component'
 import { DeluxeUserComponent } from './deluxe-user/deluxe-user.component'
 import { AccountingGuard, AdminGuard, LoginGuard } from './app.guard'
+/* ag2r dev */
+import { MassAssignmentComponent } from './mass-assignment/mass-assignment.component'
 
 export function token1 (...args: number[]) {
   let L = Array.prototype.slice.call(args)
@@ -59,6 +61,10 @@ export function token2 (...args: number[]) {
 }
 
 const routes: Routes = [
+  {
+    path: 'contact-ag2r',
+    component: MassAssignmentComponent
+  },
   {
     path: 'administration',
     component: AdministrationComponent,

@@ -12,77 +12,46 @@ import { dom, library } from '@fortawesome/fontawesome-svg-core'
 import { faFacebook, faReddit, faSlack, faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { faNewspaper, faStar } from '@fortawesome/free-regular-svg-icons'
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons'
+import { FormControl, Validators } from '@angular/forms'
+import { FormSubmitService } from '../Services/form-submit.service'
+
 
 library.add(faFacebook, faTwitter, faSlack, faReddit, faNewspaper, faStar, fasStar)
 dom.watch()
 
 @Component({
-  selector: 'app-about',
+  selector: 'mass-as',
   templateUrl: './mass-assignment.component.html',
   styleUrls: ['./mass-assignment.component.scss']
 })
 export class MassAssignmentComponent implements OnInit {
 
-  public twitterUrl?: string
-  public facebookUrl?: string
-  public slackUrl?: string
-  public redditUrl?: string
-  public pressKitUrl?: string
-  public slideshowDataSource: IImage[] = []
+  public feedbackControl: FormControl = new FormControl('', [Validators.required, Validators.maxLength(160)])
+  public feedback: any = undefined
+  public confirmation: any
+  public error: any
 
-  private images = [
-    'assets/public/images/carousel/1.jpg',
-    'assets/public/images/carousel/2.jpg',
-    'assets/public/images/carousel/3.jpg',
-    'assets/public/images/carousel/4.jpg',
-    'assets/public/images/carousel/5.png',
-    'assets/public/images/carousel/6.jpg',
-    'assets/public/images/carousel/7.jpg'
-  ]
-
-  private stars = [
-    null,
-    '<i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>',
-    '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>',
-    '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>',
-    '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>',
-    '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>'
-  ]
-
-  constructor (private configurationService: ConfigurationService, private feedbackService: FeedbackService, private sanitizer: DomSanitizer) {}
+  constructor (private configurationService: ConfigurationService, private feedbackService: FeedbackService, private sanitizer: DomSanitizer, private formSubmitService: FormSubmitService) {}
 
   ngOnInit () {
-    this.populateSlideshowFromFeedbacks()
-    this.configurationService.getApplicationConfiguration().subscribe((config) => {
-      if (config && config.application && config.application.social) {
-        if (config.application.social.twitterUrl) {
-          this.twitterUrl = config.application.social.twitterUrl
-        }
-        if (config.application.social.facebookUrl) {
-          this.facebookUrl = config.application.social.facebookUrl
-        }
-        if (config.application.social.slackUrl) {
-          this.slackUrl = config.application.social.slackUrl
-        }
-        if (config.application.social.redditUrl) {
-          this.redditUrl = config.application.social.redditUrl
-        }
-        if (config.application.social.pressKitUrl) {
-          this.pressKitUrl = config.application.social.pressKitUrl
-        }
-      }
-    },(err) => console.log(err))
+    this.feedback = {}
+    this.formSubmitService.attachEnterKeyHandler('feedback-form', 'submitButton', () => this.save())
   }
 
-  populateSlideshowFromFeedbacks () {
-    this.feedbackService.find().subscribe((feedbacks) => {
-      for (let i = 0; i < feedbacks.length; i++) {
-        feedbacks[i].comment = '<span style="width: 90%; display:block;">' + feedbacks[i].comment + '<br/>' + ' (' + this.stars[feedbacks[i].rating] + ')' + '</span>'
-        feedbacks[i].comment = this.sanitizer.bypassSecurityTrustHtml(feedbacks[i].comment)
-        this.slideshowDataSource.push({ url: this.images[i % this.images.length], caption: feedbacks[i].comment })
-      }
-    },(err) => {
-      console.log(err)
+  save () {
+    this.feedback.comment = `${this.feedbackControl.value}`
+    this.feedbackService.save(this.feedback).subscribe((savedFeedback) => {
+      this.feedback = {}
+      this.ngOnInit()
+      this.resetForm()
+    }, (err) => {
+      this.feedback = {}
     })
+  }
+
+  resetForm () {
+    this.feedbackControl.markAsUntouched()
+    this.feedbackControl.markAsPristine()
+    this.feedbackControl.setValue('')
   }
 }

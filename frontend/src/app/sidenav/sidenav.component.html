@@ -221,6 +221,14 @@
       {{"LABEL_DELUXE_MEMBERSHIP" | translate}}
     </span>
   </a>
+  <a mat-list-item routerLink="/contact-ag2r" (click)="onToggleSidenav()" aria-label="Contact us">
+    <i class="material-icons">
+      perm_contact_calendar
+    </i>
+    <span class="menu-text truncate">
+      Contact
+    </span>
+  </a>
 
   <mat-divider *ngIf="scoreBoardVisible || showGitHubLink" style="margin-bottom: 10px;"></mat-divider>
 

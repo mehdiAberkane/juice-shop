@@ -11,7 +11,7 @@ mat-card {
   width: 80%;
 }
 
-.about-us {
+.mass-as {
   margin-left: 8.33333%;
   margin-right: 8.33333%;
   width: 83.3333%;
@@ -28,4 +28,43 @@ button {
 .text-justify {
   text-align: justify;
   text-justify: inter-word;
+}
+$star-off: #c8c8c8;
+$star-on: #ffd700;
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.rating-container {
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.star {
+  color: $star-off;
+}
+
+.active {
+  color: $star-on;
+}
+
+.select {
+  color: $star-on;
+}
+
+:host ::ng-deep .br {
+  margin: 0 !important;
+}
+
+#submitButton {
+  margin-left: 20%;
+  margin-top: 30px;
+  width: 60%;
+}
+
+textarea {
+  background-color: greenyellow;
 }
