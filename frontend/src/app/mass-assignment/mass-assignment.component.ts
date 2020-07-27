@@ -6,7 +6,7 @@
 import { Component, OnInit } from '@angular/core'
 import { DomSanitizer } from '@angular/platform-browser'
 import { ConfigurationService } from '../Services/configuration.service'
-import { FeedbackService } from '../Services/feedback.service'
+import { Contact_AG2RService } from '../Services/contact-ag2r.service'
 import { IImage } from 'ng-simple-slideshow'
 import { dom, library } from '@fortawesome/fontawesome-svg-core'
 import { faFacebook, faReddit, faSlack, faTwitter } from '@fortawesome/free-brands-svg-icons'
@@ -15,8 +15,6 @@ import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons'
 import { FormControl, Validators } from '@angular/forms'
 import { FormSubmitService } from '../Services/form-submit.service'
 
-
-library.add(faFacebook, faTwitter, faSlack, faReddit, faNewspaper, faStar, fasStar)
 dom.watch()
 
 @Component({
@@ -31,7 +29,7 @@ export class MassAssignmentComponent implements OnInit {
   public confirmation: any
   public error: any
 
-  constructor (private configurationService: ConfigurationService, private feedbackService: FeedbackService, private sanitizer: DomSanitizer, private formSubmitService: FormSubmitService) {}
+  constructor (private configurationService: ConfigurationService, private Contact_AG2RService: Contact_AG2RService, private sanitizer: DomSanitizer, private formSubmitService: FormSubmitService) {}
 
   ngOnInit () {
     this.feedback = {}
@@ -40,7 +38,7 @@ export class MassAssignmentComponent implements OnInit {
 
   save () {
     this.feedback.comment = `${this.feedbackControl.value}`
-    this.feedbackService.save(this.feedback).subscribe((savedFeedback) => {
+    this.Contact_AG2RService.save(this.feedback).subscribe((savedFeedback) => {
       this.feedback = {}
       this.ngOnInit()
       this.resetForm()

@@ -559,7 +559,7 @@ app.post('/profile', updateUserProfile())
 
 /* Custom Restful API for AG2R */
 app.get('/rest/mass-assignment', massAssignment())
-app.get('/rest/contact', contactPage())
+app.post('/api/contact-ag2r', contactPage())
 
 app.use(angular())
 
