@@ -15,11 +15,11 @@ module.exports = function contactPage () {
   return (req, res, next) => {
     /*models.sequelize.query(`CREATE TABLE contacts_ag2r (
       contact_id INTEGER PRIMARY KEY,
-      first_name TEXT NOT NULL,
-      last_name TEXT NOT NULL,
-      email TEXT NOT NULL UNIQUE,
-      phone TEXT NOT NULL UNIQUE
-    );`)*/
+      author TEXT NOT NULL,
+      last_name TEXT NOT NULL
+    );`)
+
+    //models.sequelize.query(`DROP TABLE contacts_ag2r;`)
 
     models.sequelize.getQueryInterface().showAllSchemas().then((tableObj) => {
       console.log('// Tables in database','==========================');
@@ -29,11 +29,21 @@ module.exports = function contactPage () {
         console.log('showAllSchemas ERROR',err);
     })
 
-    console.log(req)
-    console.log(req.body.comment)
+    */
+
+    models.sequelize.query("INSERT INTO contacts_ag2r (author, last_name) VALUES ('"+req.body.author+"', '"+req.body.comment+"');")
+
+    models.sequelize.query('SELECT * FROM contacts_ag2r').then(([data]) => {
+      const dataJson = utils.queryResultToJson(data)
+      console.log(dataJson)
+    })
+
+    //console.log(contacts)
+    //console.log(req.body.comment)
+
     res.status(200).json({
-        status: 'dsdsd',
-        data: {}
+        status: 'Working',
+        data: {reponse: 'ça marche bien'}
       })
   }
 }

@@ -12,7 +12,7 @@
   
         <mat-form-field appearance="outline" color="accent">
           <mat-label translate>LABEL_AUTHOR</mat-label>
-          <input matInput type="text" aria-label="Field with the name of the author">
+          <input [formControl]="authorControl" matInput type="text" #author id="author" aria-label="Field with the name of the author">
         </mat-form-field>
   
         <mat-form-field appearance="outline" color="accent">
@@ -29,9 +29,8 @@
           <mat-error *ngIf="feedbackControl.invalid && feedbackControl.errors.required" translate>MANDATORY_COMMENT
           </mat-error>
         </mat-form-field>
-        <!--mat-form-field appearance="outline" color="accent">
-          <mat-label translate>LABEL_RESULT</mat-label>
-        </mat-form-field-->
+        <div class="error" *ngIf="error">{{error}}</div>
+        <div class="confirmation" [hidden]="!(confirmation && !messageControl.dirty)">{{ confirmation }}</div>
       </div>
       <button type="submit" id="submitButton" mat-raised-button color="primary"
               [disabled]="feedbackControl.invalid"

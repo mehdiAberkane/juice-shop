@@ -25,6 +25,8 @@ dom.watch()
 export class MassAssignmentComponent implements OnInit {
 
   public feedbackControl: FormControl = new FormControl('', [Validators.required, Validators.maxLength(160)])
+  public authorControl: FormControl = new FormControl('', [Validators.required, Validators.maxLength(160)])
+  public messageControl: FormControl = new FormControl('', [Validators.required, Validators.maxLength(160)])
   public feedback: any = undefined
   public confirmation: any
   public error: any
@@ -38,11 +40,15 @@ export class MassAssignmentComponent implements OnInit {
 
   save () {
     this.feedback.comment = `${this.feedbackControl.value}`
+    this.feedback.author = `${this.authorControl.value}`
+    
     this.Contact_AG2RService.save(this.feedback).subscribe((savedFeedback) => {
+      this.confirmation = savedFeedback.reponse
       this.feedback = {}
       this.ngOnInit()
       this.resetForm()
     }, (err) => {
+      console.log("mes erreurs" + err)
       this.feedback = {}
     })
   }
