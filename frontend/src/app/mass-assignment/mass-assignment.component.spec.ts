@@ -8,6 +8,7 @@ import { SlideshowModule } from 'ng-simple-slideshow'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { MatCardModule } from '@angular/material/card'
 import { MassAssignmentComponent } from './mass-assignment.component'
+import { MatInputModule } from '@angular/material/input'
 
 xdescribe('MassAssignmentComponent', () => {
   let component: MassAssignmentComponent
@@ -18,7 +19,8 @@ xdescribe('MassAssignmentComponent', () => {
       imports: [
         HttpClientTestingModule,
         SlideshowModule,
-        MatCardModule
+        MatCardModule,
+        MatInputModule
       ],
       declarations: [ MassAssignmentComponent ]
     })
