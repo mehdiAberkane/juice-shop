@@ -53,3 +53,6 @@ config/*.yml
 !config/mozilla.yml
 !config/unsafe.yml
 !config/tutorial.yml
+
+#truc
+test.xml

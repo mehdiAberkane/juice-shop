@@ -1,0 +1,16 @@
+
+models.sequelize.query(`CREATE TABLE contacts_ag2r (
+    contact_id INTEGER PRIMARY KEY,
+    author TEXT NOT NULL,
+    comment TEXT NOT NULL
+);`)
+
+models.sequelize.query(`DROP TABLE contact_ag2rs;`)
+
+models.sequelize.getQueryInterface().showAllSchemas().then((tableObj) => {
+    console.log('// Tables in database','==========================');
+    console.log(tableObj);
+})
+.catch((err) => {
+    console.log('showAllSchemas ERROR',err);
+})
