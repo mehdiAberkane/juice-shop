@@ -132,6 +132,7 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { FeedbackDetailsComponent } from './feedback-details/feedback-details.component'
 import { MassAssignmentComponent } from './mass-assignment/mass-assignment.component'
+import { GuestBookComponent } from './guestbook/guestbook.component'
 
 export function HttpLoaderFactory (http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json')
@@ -192,7 +193,8 @@ export function HttpLoaderFactory (http: HttpClient) {
     PhotoWallComponent,
     DeluxeUserComponent,
     FeedbackDetailsComponent,
-    MassAssignmentComponent
+    MassAssignmentComponent,
+    GuestBookComponent
   ],
   entryComponents: [
     ProductDetailsComponent,
