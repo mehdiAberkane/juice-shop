@@ -50,6 +50,10 @@ const login = require('./routes/login')
 /* AG2R route */
 const massAssignment = require('./routes/massAssignment')
 const contactPage = require('./routes/contactPage')
+const {
+  postbookPage,
+  getbookPage,
+} = require('./routes/guestbookPage')
 
 const changePassword = require('./routes/changePassword')
 const resetPassword = require('./routes/resetPassword')
@@ -560,6 +564,8 @@ app.post('/profile', updateUserProfile())
 /* Custom Restful API for AG2R */
 app.get('/rest/mass-assignment', massAssignment())
 app.post('/api/contact-ag2r', contactPage())
+app.post('/api/guestbook', postbookPage())
+app.get('/api/guestbook', getbookPage())
 
 app.use(angular())
 
