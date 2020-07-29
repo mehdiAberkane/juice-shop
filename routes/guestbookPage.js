@@ -19,37 +19,17 @@ function resolveAfter2Seconds() {
 
 async function asyncCall(author, comment) {
   const result = await resolveAfter2Seconds();  
-  models.sequelize.query("INSERT INTO contact_ag2rs (author, comment) VALUES ('"+author+"', '"+comment+"');").then((result) => {
-    models.sequelize.query('SELECT * FROM contact_ag2rs order by id desc LIMIT 1').then(([data]) => {
-      const dataJson = utils.queryResultToJson(data)
-      var xml =
-        '<?xml version="1.0" encoding="utf-8"?>' +
-        '<note importance="high" logged="true">' +
-        '    <title>'+dataJson.data[0].comment+'</title>' +
-        '    <todo>Work</todo>' +
-        '    <todo>Play</todo>' +
-        '</note>';
-        fs.writeFile('test.xml', xml, (err) => {
-          if (err) throw err;
-
-          fs.readFile('test.xml', 'utf8', function (err,data) {
-            if (err) {
-              return console.log(err);
-            }
-
-            console.log(data);
-          });
-      });
-    })
-
+  models.sequelize.query("INSERT INTO guestbooks (author, comment) VALUES ('"+author+"', '"+comment+"');").then((result) => {
+    console.log('toutvabien')
   }).catch(error => {
     console.log(error)
   })
 }
 
+//post
 function postbookPage () {
   return (req, res, next) => {
-    //asyncCall(req.body.author, req.body.comment)
+    asyncCall(req.body.author, req.body.comment)
 
     res.status(200).json({
         status: 'Working',
@@ -58,15 +38,20 @@ function postbookPage () {
   }
 }
 
-
+//get
 function getbookPage () {
   return (req, res, next) => {
-    //asyncCall(req.body.author, req.body.comment)
+
+    models.sequelize.query("SELECT * FROM guestbooks order by id desc LIMIT 1;").then((result) => {
+      console.log(result)
+      }).catch(error => {
+        console.log(error)
+      })
 
     res.status(200).json({
-        status: 'Working',
-        data: {reponse: 'Message sauvegarder, guestbook get'}
-      })
+      status: 'Working',
+      data: {reponse: 'Message sauvegarder, guestbook get'}
+    })
   }
 }
 
