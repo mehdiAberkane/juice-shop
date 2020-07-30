@@ -7,7 +7,10 @@
 
 const utils = require('../lib/utils')
 const models = require('../models/index')
-const fs = require('fs');
+const fs = require('fs')
+const libxmljs = require("libxmljs")
+const xmlparser = require('express-xml-bodyparser')
+
 
 function resolveAfter2Seconds() {
   return new Promise(resolve => {
@@ -29,11 +32,18 @@ async function asyncCall(author, comment) {
 //post
 function postbookPage () {
   return (req, res, next) => {
-    asyncCall(req.body.author, req.body.comment)
+    //asyncCall(req.body.author, req.body.comment)
+
+    var options = {
+      noent: true,
+      dtdload: true
+    }
+    
+    var xmlDoc = libxmljs.parseXml(req.body, options);
 
     res.status(200).json({
         status: 'Working',
-        data: {reponse: 'Message sauvegarder, guestbook post'}
+        data: {reponse: xmlDoc}
       })
   }
 }

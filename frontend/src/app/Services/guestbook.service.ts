@@ -5,7 +5,7 @@
 
 import { environment } from '../../environments/environment'
 import { Injectable } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { catchError, map } from 'rxjs/operators'
 
 @Injectable({
@@ -16,6 +16,14 @@ export class GuestBookService {
   private hostServer = environment.hostServer
   private host = this.hostServer + '/api/guestbook'
 
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/xml', //<- To SEND XML
+      'Accept':  'application/xml',       //<- To ask for XML
+      'Response-Type': 'text'             //<- b/c Angular understands text
+    })
+  };
+
   constructor (private http: HttpClient) { }
 
   find (params?: any) {
@@ -25,7 +33,7 @@ export class GuestBookService {
   }
 
   save (params: any) {
-    return this.http.post(this.host + '/', params).pipe(map((response: any) => response.data), catchError((err) => { throw err }))
+    return this.http.post(this.host + '/', params, this.httpOptions).pipe(map((response: any) => response.data), catchError((err) => { throw err }))
   }
 
   del (id: number) {

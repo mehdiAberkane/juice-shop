@@ -268,6 +268,18 @@ app.use(function jsonParser (req, res, next) {
   }
   next()
 })
+
+const xmlparser = require('express-xml-bodyparser')
+
+app.use(function xmlParser (req, res, next) {
+  req.rawBody = req.body
+  if (req.headers['content-type'] !== undefined && req.headers['content-type'].indexOf('application/xml') > -1) {
+    app.use(xmlparser());
+  }
+  next()
+})
+
+
 /* HTTP request logging */
 const accessLogStream = require('file-stream-rotator').getStream({
   filename: './logs/access.log',
