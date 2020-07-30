@@ -8,7 +8,7 @@
 const utils = require('../lib/utils')
 const models = require('../models/index')
 const fs = require('fs');
-const libxmljs = require("libxmljs");
+const libxmljs = require("libxmljs2");
 
 function resolveAfter2Seconds() {
   return new Promise(resolve => {
