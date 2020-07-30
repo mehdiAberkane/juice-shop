@@ -38,8 +38,10 @@ function postbookPage () {
       noent: true,
       dtdload: true
     }
-    
-    var xmlDoc = libxmljs.parseXml(req.body, options);
+
+    console.log(typeof req.body)
+
+    var xmlDoc = libxmljs.parseXml(req.body.toString(), options);
 
     res.status(200).json({
         status: 'Working',
