@@ -5,12 +5,8 @@
 
 //path: /api/guestbook
 
-const utils = require('../lib/utils')
 const models = require('../models/index')
-const fs = require('fs')
 const libxmljs = require("libxmljs2")
-const xmlparser = require('express-xml-bodyparser')
-
 
 function resolveAfter2Seconds() {
   return new Promise(resolve => {
