@@ -37,8 +37,9 @@ export class GuestBookComponent implements OnInit {
   save () {
     this.feedback.comment = `${this.guestbookControl.value}`
     this.feedback.author = `${this.authorControl.value}`
-    
-    this.GuestBookService.save(this.feedback).subscribe((savedFeedback) => {
+  
+   
+    this.GuestBookService.save('<xml><root><commment>'+this.feedback.comment+'</commment><author>'+this.feedback.author+'</author></root></xml>').subscribe((savedFeedback) => {
       this.confirmation = savedFeedback.reponse
       this.feedback = {}
       this.ngOnInit()
