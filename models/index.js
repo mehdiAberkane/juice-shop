@@ -21,6 +21,7 @@ const sequelize = new Sequelize('database', 'username', 'password', {
   storage: 'data/juiceshop.sqlite',
   logging: false
 })
+
 sequelizeNoUpdateAttributes(sequelize)
 const db = {}
 
