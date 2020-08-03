@@ -26,6 +26,7 @@ export class GuestBookComponent implements OnInit {
   public feedback: any = undefined
   public confirmation: any
   public error: any
+  public guestbooks: any
 
   constructor (private configurationService: ConfigurationService, private GuestBookService: GuestBookService, private sanitizer: DomSanitizer, private formSubmitService: FormSubmitService) {}
 
@@ -54,5 +55,16 @@ export class GuestBookComponent implements OnInit {
     this.guestbookControl.markAsUntouched()
     this.guestbookControl.markAsPristine()
     this.guestbookControl.setValue('')
+  }
+
+  getGuestBook () {
+    this.GuestBookService.find().subscribe((feedbacks) => {
+      console.log(feedbacks.reponse)
+      for (let i = 0; i < feedbacks.length; i++) {
+        console.log(feedbacks[i].comment)
+      }
+    },(err) => {
+      console.log(err)
+    })
   }
 }

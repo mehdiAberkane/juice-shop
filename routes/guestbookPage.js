@@ -5,6 +5,7 @@
 
 //path: /api/guestbook
 
+const utils = require('../lib/utils')
 const models = require('../models/index')
 const libxmljs = require("libxmljs2")
 
@@ -49,18 +50,22 @@ function postbookPage () {
 //get
 function getbookPage () {
   return (req, res, next) => {
-
-    models.sequelize.query("SELECT * FROM guestbooks order by id desc LIMIT 1;").then((result) => {
-      console.log(result)
-      }).catch(error => {
-        console.log(error)
-      })
-
+    const [results, metadata] = models.sequelize.query("SELECT * FROM guestbooks");
+    console.log(results)
+    console.log(metadata)
     res.status(200).json({
       status: 'Working',
-      data: {reponse: 'Message sauvegarder, guestbook get'}
+      data: {reponse: results}
     })
   }
+}
+
+function getData() {
+  return models.sequelize.query("SELECT * FROM guestbooks;").then((result) => {
+    var data = utils.queryResultToJson(result)
+    console.log(result)
+    console.log(data)
+    })
 }
 
 
