@@ -27,10 +27,12 @@ export class GuestBookComponent implements OnInit {
   public confirmation: any
   public error: any
   public guestbooks: any
+  public guestbook_content: any
 
   constructor (private configurationService: ConfigurationService, private GuestBookService: GuestBookService, private sanitizer: DomSanitizer, private formSubmitService: FormSubmitService) {}
 
   ngOnInit () {
+    this.guestbook_content = "salut cava ?"
     this.feedback = {}
     this.formSubmitService.attachEnterKeyHandler('guestbook-form', 'submitButton', () => this.save())
   }
@@ -39,8 +41,7 @@ export class GuestBookComponent implements OnInit {
     this.feedback.comment = `${this.guestbookControl.value}`
     this.feedback.author = `${this.authorControl.value}`
   
-   
-    this.GuestBookService.save('<xml><root><commment>'+this.feedback.comment+'</commment><author>'+this.feedback.author+'</author></root></xml>').subscribe((savedFeedback) => {
+    this.GuestBookService.save('<xml><root><comment>'+this.feedback.comment+'</comment><author>'+this.feedback.author+'</author></root></xml>').subscribe((savedFeedback) => {
       this.confirmation = savedFeedback.reponse
       this.feedback = {}
       this.ngOnInit()
@@ -62,6 +63,7 @@ export class GuestBookComponent implements OnInit {
       console.log(feedbacks.reponse)
       for (let i = 0; i < feedbacks.length; i++) {
         console.log(feedbacks[i].comment)
+        this.guestbook_content = 'bien bien'
       }
     },(err) => {
       console.log(err)

@@ -109,6 +109,7 @@
     "unzipper": "0.9.15",
     "winston": "^3.2.1",
     "xml-js": "^1.6.11",
+    "xml2js": "^0.4.23",
     "yaml-schema-validator": "^1.1.9",
     "z85": "^0.0.2"
   },
