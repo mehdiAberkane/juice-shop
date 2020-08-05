@@ -51,21 +51,6 @@ function postbookPage () {
 }
 
 //get
-/*
-function getbookPage () {
-  return (req, res, next) => {
-    const results = models.sequelize.query("SELECT * FROM guestbooks;").then()
-    const data = utils.queryResultToJson(results)
-    console.log(data)
-    console.log(data.data)
-    res.status(200).json({
-      status: 'Working',
-      data: {reponse: data}
-    })
-  }
-}
-*/
-
 function getbookPage () {
   return (req, res, next) => {
     models.sequelize.query("SELECT * FROM guestbooks order by id desc limit 1").then((results) => {

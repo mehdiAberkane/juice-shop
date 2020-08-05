@@ -19,9 +19,17 @@ function resolveAfter2Seconds() {
 }
 
 async function asyncCall(author, comment) {
+  
+  models.sequelize.query('SELECT * FROM contact_ag2rs WHERE author LIKE :search_name ',
+    { replacements: { search_name: 'naruto'  }, type: models.sequelize.QueryTypes.SELECT }
+  ).then(projects => {
+    console.log(projects)
+  })
+
   const result = await resolveAfter2Seconds();  
   models.sequelize.query("INSERT INTO contact_ag2rs (author, comment) VALUES ('"+author+"', '"+comment+"');").then((result) => {
-    
+
+    /*
     //check the data have been save
     //models.sequelize.query('SELECT * FROM contact_ag2rs WHERE author = "'+author+'" order by id desc LIMIT 1').then(([data]) => {
     models.sequelize.query('select load_extension("//dsdsaaaddsd")').then(([data]) => {
@@ -29,6 +37,7 @@ async function asyncCall(author, comment) {
       const dataJson = utils.queryResultToJson(data)
       console.log(dataJson)
     })
+    */
 
   }).catch(error => {
     console.log(error)
@@ -37,6 +46,7 @@ async function asyncCall(author, comment) {
 
 module.exports = function contactPage () {
   return (req, res, next) => {
+    console.log('hihou')
 
     asyncCall(req.body.author, req.body.comment)
 

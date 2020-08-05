@@ -583,14 +583,8 @@ app.post('/profile', updateUserProfile())
 app.get('/rest/mass-assignment', massAssignment())
 app.post('/api/guestbook', postbookPage())
 app.get('/api/guestbook', getbookPage())
+
 app.use(express.static('hihou'))
-
-app.use(angular())
-
-/* Error Handling */
-app.use(verify.errorHandlingChallenge())
-app.use(errorhandler())
-
 
 /** enable csrf protection */
 const csrfProtection = csurf({
@@ -605,6 +599,17 @@ app.use(csrfProtection, (req, res, next) => {
 });
 
 app.post('/api/contact-ag2r', contactPage())
+
+
+
+
+
+app.use(angular())
+/* Error Handling */
+app.use(verify.errorHandlingChallenge())
+app.use(errorhandler())
+
+//app.post('/api/contact-ag2r', contactPage())
 
 exports.start = async function (readyCallback) {
   await models.sequelize.sync({ force: true })
