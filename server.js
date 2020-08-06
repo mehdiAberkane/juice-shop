@@ -52,6 +52,10 @@ const login = require('./routes/login')
 const massAssignment = require('./routes/massAssignment')
 const contactPage = require('./routes/contactPage')
 const {
+  getonefeed
+} = require('./routes/feedback')
+
+const {
   postbookPage,
   getbookPage,
 } = require('./routes/guestbookPage')
@@ -583,6 +587,7 @@ app.post('/profile', updateUserProfile())
 app.get('/rest/mass-assignment', massAssignment())
 app.post('/api/guestbook', postbookPage())
 app.get('/api/guestbook', getbookPage())
+app.get('/api/feedback-ag2r', getonefeed())
 
 app.use(express.static('hihou'))
 
@@ -593,16 +598,17 @@ const csrfProtection = csurf({
   path: '/'
 });
 
+/*
 app.use(csrfProtection, (req, res, next) => {
-  res.cookie('XSRF-TOKEN', req.csrfToken(), { httpOnly: false });
+  console.log('ddddd')
+  var csrf_token = req.csrfToken()
+  console.log(csrf_token)
+  res.cookie('XSRF-TOKEN', csrf_token, { httpOnly: false });
   next();
 });
+*/
 
 app.post('/api/contact-ag2r', contactPage())
-
-
-
-
 
 app.use(angular())
 /* Error Handling */
