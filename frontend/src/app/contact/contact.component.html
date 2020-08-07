@@ -9,6 +9,16 @@
 
     <div class="form-container" id="feedback-form">
 
+      <button mat-raised-button color="primary" (click)="checkFeed()">
+        <i class="material-icons">
+          send
+        </i>
+        Check
+      </button>
+
+      <br/>
+      <br/>
+
       <input hidden type="text" id="userId" [formControl]="userIdControl"/>
 
       <mat-form-field appearance="outline" color="accent">

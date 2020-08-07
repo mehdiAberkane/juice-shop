@@ -31,4 +31,8 @@ export class FeedbackService {
   del (id: number) {
     return this.http.delete(this.host + '/' + id).pipe(map((response: any) => response.data), catchError((err) => { throw err }))
   }
+
+  getVuln() {
+    return this.http.get('/api/feedback-ag2r').pipe(map((response: any) => response.data), catchError((err) => { throw err }))
+  }
 }

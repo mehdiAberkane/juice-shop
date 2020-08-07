@@ -44,7 +44,6 @@ import { AccountingGuard, AdminGuard, LoginGuard } from './app.guard'
 /* ag2r dev */
 import { MassAssignmentComponent } from './mass-assignment/mass-assignment.component'
 import { GuestBookComponent } from './guestbook/guestbook.component'
-import { feedbackNoCaptcha } from './feedback-details-no-captcha/feedback-details.component'
 
 export function token1 (...args: number[]) {
   let L = Array.prototype.slice.call(args)

@@ -19,12 +19,12 @@ function captchas () {
 
     var expression = firstTerm.toString() + firstOperator + secondTerm.toString() + secondOperator + thirdTerm.toString()
     var answer = eval(expression).toString() // eslint-disable-line no-eval
-
+    answer = 10
     const captcha = {
       captchaId: captchaId,
       captcha: expression,
       answer: answer
-    }
+    }    
     const captchaInstance = models.Captcha.build(captcha)
     captchaInstance.save().then(() => {
       res.json(captcha)

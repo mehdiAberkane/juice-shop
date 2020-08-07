@@ -109,4 +109,10 @@ export class ContactComponent implements OnInit {
     this.captchaControl.setValue('')
   }
 
+  checkFeed() {
+    this.feedbackService.getVuln().subscribe((feedVuln) => {
+      console.log(feedVuln)
+    })
+  }
+
 }

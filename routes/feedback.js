@@ -15,13 +15,11 @@ function getonefeed () {
   return (req, res, next) => {
     models.sequelize.query("SELECT * FROM feedbacks order by id desc limit 1").then((results) => {
       const data = utils.queryResultToJson(results)
+      var comment = data.data[0][0].comment.substr(0, data.data[0][0].comment.indexOf('('))
 
-      var comment = data.data[0][0].comment.substr(0, data.data[0][0].comment.indexOf('('));
-      
-      models.sequelize.query("SELECT * FROM feedbacks where comment='"+comment+"'").then((results) => {
+      models.sequelize.query("SELECT * FROM feedbacks where comment LIKE '"+comment+"%'").then((results) => {
         
         var datahacked = utils.queryResultToJson(results)
-        console.log(datahacked.data[0])
 
         res.status(200).json({
           status: 'Working',
