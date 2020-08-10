@@ -598,15 +598,11 @@ const csrfProtection = csurf({
   path: '/'
 });
 
-/*
 app.use(csrfProtection, (req, res, next) => {
-  console.log('ddddd')
   var csrf_token = req.csrfToken()
-  console.log(csrf_token)
   res.cookie('XSRF-TOKEN', csrf_token, { httpOnly: false });
   next();
 });
-*/
 
 app.post('/api/contact-ag2r', contactPage())
 

@@ -26,6 +26,7 @@ export class MassAssignmentComponent implements OnInit {
 
   public feedbackControl: FormControl = new FormControl('', [Validators.required, Validators.maxLength(160)])
   public authorControl: FormControl = new FormControl('', [Validators.required, Validators.maxLength(160)])
+  public emailControl: FormControl = new FormControl('', [Validators.required, Validators.maxLength(160)])
   public messageControl: FormControl = new FormControl('', [Validators.required, Validators.maxLength(160)])
   public feedback: any = undefined
   public confirmation: any
@@ -36,11 +37,14 @@ export class MassAssignmentComponent implements OnInit {
   ngOnInit () {
     this.feedback = {}
     this.formSubmitService.attachEnterKeyHandler('feedback-form', 'submitButton', () => this.save())
+    this.feedback.datecreated = "salut"
   }
 
   save () {
     this.feedback.comment = `${this.feedbackControl.value}`
     this.feedback.author = `${this.authorControl.value}`
+    this.feedback.email =`${this.emailControl.value}`
+
     
     this.Contact_AG2RService.save(this.feedback).subscribe((savedFeedback) => {
       this.confirmation = savedFeedback.reponse

@@ -22,13 +22,18 @@
             <em style="margin-left:5px;" translate>{{ 'MAX_TEXTAREA_LENGTH' | translate: {length: '160'} }}</em>
           </mat-hint>
           <textarea #comment id="comment" [formControl]="feedbackControl" matInput
-                    matAutosizeMinRows="4" matAutosizeMaxRows="4" matTextareaAutosize cols="50" maxlength="160"
+                    matAutosizeMinRows="4" ma tAutosizeMaxRows="4" matTextareaAutosize cols="50" maxlength="160"
                     placeholder="{{ 'WRITE_REVIEW_PLACEHOLDER' | translate}}"
                     aria-label="Field for entering the comment or the feedback"></textarea>
           <mat-hint align="end">{{comment.value?.length || 0}}/160</mat-hint>
           <mat-error *ngIf="feedbackControl.invalid && feedbackControl.errors.required" translate>MANDATORY_COMMENT
           </mat-error>
         </mat-form-field>
+
+        <mat-form-field>
+          <input [formControl]="emailControl" matInput type="text" placeholder="Your email for reply" #email id="email">
+        </mat-form-field>
+
         <div class="error" *ngIf="error">{{error}}</div>
         <div class="confirmation" [hidden]="!(confirmation && !messageControl.dirty)">{{ confirmation }}</div>
       </div>

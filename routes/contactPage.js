@@ -46,13 +46,12 @@ async function asyncCall(author, comment) {
 
 module.exports = function contactPage () {
   return (req, res, next) => {
-    console.log('hihou')
-
+    console.log(req.body)
     asyncCall(req.body.author, req.body.comment)
 
     res.status(200).json({
         status: 'Working',
-        data: {reponse: 'Message sauvegarder, merci'}
+        data: {reponse: 'Data save, thanks'}
       })
   }
 }
