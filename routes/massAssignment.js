@@ -11,6 +11,7 @@ const config = require('config')
 
 module.exports = function massAssignment () {
   return (req, res, next) => {
+    console.log('kikou')
     res.status(200).json({
         status: 'Coucou',
         data: {}
