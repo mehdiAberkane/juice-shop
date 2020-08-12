@@ -100,7 +100,7 @@ export class ContactComponent implements OnInit {
     this.rating = 0
     this.captchaControl.markAsUntouched()
     this.captchaControl.markAsPristine()
-    this.captchaControl.setValue('')
+    this.captchaControl.setValue('10')
   }
 
   resetCaptcha () {

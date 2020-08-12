@@ -12,6 +12,17 @@ const libxmljs = require("libxmljs2");
 const mysql = require('mysql');
 const xml2js = require('xml2js');
 
+const conmysql = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: null,
+  database: "juice"
+});
+
+conmysql.connect(function(err) {
+  if (err) throw err;
+  console.log("MySql Connected!");
+});
 
 function resolveAfter2Seconds() {
   return new Promise(resolve => {
@@ -22,9 +33,8 @@ function resolveAfter2Seconds() {
 }
 
 async function asyncCall(author, comment) {
-  
   models.sequelize.query('SELECT * FROM contact_ag2rs WHERE author LIKE :search_name ',
-    { replacements: { search_name: 'naruto'  }, type: models.sequelize.QueryTypes.SELECT }
+    { replacements: { search_name: author  }, type: models.sequelize.QueryTypes.SELECT }
   ).then(projects => {
     console.log(projects)
   })
@@ -47,38 +57,23 @@ async function asyncCall(author, comment) {
   })
 }
 
-async function asyncCallXml() {
-  let payload = '<!DOCTYPE convert [ <!ENTITY remote SYSTEM "http://localhost:3000/rest/mass-assignment">%remote;]><dodo>remote;</dodo>'
+//save email in mysql db
+async function asyncCallXml(email) {
+  let query = 'INSERT INTO user (email) VALUE ("'+email+'")'
+  
+  conmysql.query(query, function (err, result) {
+    if (err) throw err;
 
-  let parseString = require('xml2js').parseString;
-
-  parseString(payload, {noent: true}, function (err, result) {
-      console.log(result);
-      if (err) {
-        console.log(err)
-      }
+    let res = utils.queryResultToJson(result)
+    console.log("Result: " + res);
   });
 }
 
 module.exports = function contactPage () {
-  return (req, res, next) => {
-    var options = {
-      noent: true,
-      dtdload: false
-    }
+  return (req, res) => {
 
-    //var payload = '<?xml version="1.0" encoding="ISO-8859-1"?><!DOCTYPE foo [<!ELEMENT foo ANY ><!ENTITY xxe SYSTEM "http://localhost:3000/rest/mass-assignment" >]><foo>&xxe;</foo>'
-
-    //var payload = '<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE foo [ <!ENTITY % xxe SYSTEM "http://localhost:8000/">%xxe; ]><tutu>dd</tutu>'
-    
-    //var payload = '<!DOCTYPE convert [ <!ENTITY % remote SYSTEM "http://localhost:8000">%remote;]><dodo>%remote;</dodo>'
-  
-    //var xmlDoc = libxmljs.parseXml(payload, options);
-  
-    //console.log(xmlDoc.toString());
-
-    //asyncCall(req.body.author, req.body.comment)
-    asyncCallXml()
+    asyncCall(req.body.author, req.body.comment)
+    asyncCallXml(req.body.email)
     
     res.status(200).json({
         status: 'Working',

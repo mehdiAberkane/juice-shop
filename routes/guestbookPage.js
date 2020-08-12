@@ -29,8 +29,10 @@ async function asyncCall(req) {
 
   console.log(xmlDoc.toString());
   
-  parseString(req.body, function (err, result) {
-      models.sequelize.query("INSERT INTO guestbooks (author, comment) VALUES ('"+result.xml.root[0].author.toString()+"', '"+result.xml.root[0].comment.toString()+"');").then((result) => {
+  parseString(req.body, function (err, result_string) {
+    //console.log("err " + err)
+    console.log('result ' + result_string)
+      models.sequelize.query("INSERT INTO guestbooks (author, comment) VALUES ('"+result_string.xml.root[0].author.toString()+"', '"+result_string.xml.root[0].comment.toString()+"');").then((result) => {
         console.log('toutvabien')
       }).catch(error => {
         console.log(error)
