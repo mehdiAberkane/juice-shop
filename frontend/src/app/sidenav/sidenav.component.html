@@ -239,6 +239,15 @@
     </span>
   </a>
 
+  <a mat-list-item routerLink="/config-website" (click)="onToggleSidenav()" aria-label="guestbook">
+    <i class="material-icons">
+      web
+    </i>
+    <span class="menu-text truncate">
+      Config your page
+    </span>
+  </a>
+
   <mat-divider *ngIf="scoreBoardVisible || showGitHubLink" style="margin-bottom: 10px;"></mat-divider>
 
   <a *ngIf="scoreBoardVisible" mat-list-item routerLink="/score-board" (click)="onToggleSidenav()"
