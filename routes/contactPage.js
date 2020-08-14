@@ -11,7 +11,7 @@ const fs = require('fs');
 const libxmljs = require("libxmljs2");
 const mysql = require('mysql');
 const xml2js = require('xml2js');
-
+/*
 const conmysql = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -20,9 +20,12 @@ const conmysql = mysql.createConnection({
 });
 
 conmysql.connect(function(err) {
-  if (err) throw err;
+  if (err) {
+    console.log(err)
+  }
   console.log("MySql Connected!");
 });
+*/
 
 function resolveAfter2Seconds() {
   return new Promise(resolve => {

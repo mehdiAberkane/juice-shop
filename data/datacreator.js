@@ -11,6 +11,7 @@ const utils = require('../lib/utils')
 const mongodb = require('./mongodb')
 const insecurity = require('../lib/insecurity')
 const logger = require('../lib/logger')
+const mysql = require('mysql')
 
 const fs = require('fs')
 const path = require('path')
@@ -21,6 +22,59 @@ const entities = new Entities()
 
 const readFile = util.promisify(fs.readFile)
 
+//init db mysql
+const con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: null
+});
+
+con.connect(function(err) {
+  if (err) {
+    console.log(err)
+  }
+  console.log("Connected!")
+
+  con.query("CREATE DATABASE IF NOT EXISTS juice", function (err, result) {
+    if (err) {
+      console.log(err)
+    }
+
+    console.log("Database created")
+
+    con.changeUser({database : 'juice'}, function(err) {
+      if (err) {
+        console.log(err)
+      }
+    });
+
+    var sql = "CREATE TABLE IF NOT EXISTS user (name VARCHAR(255), email VARCHAR(255))";
+
+    con.query(sql, function (err, result) {
+      if (err) {
+        console.log(err)
+      }
+      console.log("Table created");
+    });
+
+  });
+});
+/*
+
+con.connect(function(err) {
+  if (err) {
+    console.log(err)
+  }
+  console.log("Connected!");
+  var sql = "CREATE TABLE user (name VARCHAR(255), email VARCHAR(255))";
+  con.query(sql, function (err, result) {
+    if (err) {
+      console.log(err)
+    }
+    console.log("Table created");
+  });
+});
+*/
 function loadStaticData (file) {
   const filePath = path.resolve('./data/static/' + file + '.yml')
   return readFile(filePath, 'utf8')
