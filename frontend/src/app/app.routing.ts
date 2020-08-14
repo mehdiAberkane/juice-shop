@@ -44,6 +44,7 @@ import { AccountingGuard, AdminGuard, LoginGuard } from './app.guard'
 /* ag2r dev */
 import { MassAssignmentComponent } from './mass-assignment/mass-assignment.component'
 import { GuestBookComponent } from './guestbook/guestbook.component'
+import { ConfigWebsiteComponent } from './config-website/config-website.component'
 
 export function token1 (...args: number[]) {
   let L = Array.prototype.slice.call(args)
@@ -62,6 +63,10 @@ export function token2 (...args: number[]) {
 }
 
 const routes: Routes = [
+  {
+    path: 'config-website',
+    component: ConfigWebsiteComponent
+  },
   {
     path: 'contact-ag2r',
     component: MassAssignmentComponent
