@@ -133,6 +133,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { FeedbackDetailsComponent } from './feedback-details/feedback-details.component'
 import { MassAssignmentComponent } from './mass-assignment/mass-assignment.component'
 import { GuestBookComponent } from './guestbook/guestbook.component'
+import { ConfigWebsiteComponent } from './config-website/config-website.component'
 
 export function HttpLoaderFactory (http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json')
@@ -194,7 +195,8 @@ export function HttpLoaderFactory (http: HttpClient) {
     DeluxeUserComponent,
     FeedbackDetailsComponent,
     MassAssignmentComponent,
-    GuestBookComponent
+    GuestBookComponent,
+    ConfigWebsiteComponent
   ],
   entryComponents: [
     ProductDetailsComponent,

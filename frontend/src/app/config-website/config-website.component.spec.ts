@@ -7,13 +7,13 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 import { SlideshowModule } from 'ng-simple-slideshow'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { MatCardModule } from '@angular/material/card'
-import { GuestBookComponent } from './guestbook.component'
+import { ConfigWebsiteComponent } from './config-website.component'
 import { MatInputModule } from '@angular/material/input'
 import { CookieService } from 'ngx-cookie-service'
 
-xdescribe('GuestBookComponent', () => {
-  let component: GuestBookComponent
-  let fixture: ComponentFixture<GuestBookComponent>
+xdescribe('ConfigWebsiteComponent', () => {
+  let component: ConfigWebsiteComponent
+  let fixture: ComponentFixture<ConfigWebsiteComponent>
   let cookieService: any
 
   beforeEach(async(() => {
@@ -24,14 +24,14 @@ xdescribe('GuestBookComponent', () => {
         MatCardModule,
         MatInputModule
       ],
-      declarations: [ GuestBookComponent ]
+      declarations: [ ConfigWebsiteComponent ]
     })
       .compileComponents()
       cookieService = jasmine.createSpyObj('CookieService',['delete'])
   }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GuestBookComponent)
+    fixture = TestBed.createComponent(ConfigWebsiteComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })
