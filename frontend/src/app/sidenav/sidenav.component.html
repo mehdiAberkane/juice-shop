@@ -239,7 +239,7 @@
     </span>
   </a>
 
-  <a mat-list-item routerLink="/config-website" (click)="onToggleSidenav()" aria-label="guestbook">
+  <a mat-list-item routerLink="/config-website" [queryParams]="{color: 'red'}" (click)="onToggleSidenav()" aria-label="guestbook">
     <i class="material-icons">
       web
     </i>

@@ -6,33 +6,19 @@
 <div fxLayoutAlign="center">
   <mat-card class="mat-elevation-z6">
     <section class="guestbook-as">
-      <h1>Livre d'or pour AG2R La mondiale</h1>
-
-      <div (click)="muhaha()">
+      <h1 [style.background-color]="colorValue">Configuration général du site</h1>
+      <span>votre couleur actuel: {{ colorValue }}</span>
+      <div (click)="muhaha(colorValue)">
         <button class="btn btn-primary">Do something</button>
       </div>
 
-      <div class="form-container" id="guestbook-form">
+      <div class="form-container" id="config-website-form">
   
         <mat-form-field appearance="outline" color="accent">
-          <mat-label translate>LABEL_AUTHOR</mat-label>
-          <input [formControl]="authorControl" matInput type="text" #author id="author" aria-label="Field with the name of the author">
+          <mat-label>Couleur</mat-label>
+          <input [formControl]="colorControl" matInput type="text" #color id="color" aria-label="Field with the name of the color">
         </mat-form-field>
   
-        <mat-form-field appearance="outline" color="accent">
-          <mat-label translate>LABEL_COMMENT</mat-label>
-          <mat-hint translate>
-            <i class="fas fa-exclamation-circle"></i>
-            <em style="margin-left:5px;" translate>{{ 'MAX_TEXTAREA_LENGTH' | translate: {length: '160'} }}</em>
-          </mat-hint>
-          <textarea #comment id="comment" [formControl]="configwebsiteControl" matInput
-                    matAutosizeMinRows="4" matAutosizeMaxRows="4" matTextareaAutosize cols="50" maxlength="160"
-                    placeholder="{{ 'WRITE_REVIEW_PLACEHOLDER' | translate}}"
-                    aria-label="Field for entering the comment or the guestbook"></textarea>
-          <mat-hint align="end">{{comment.value?.length || 0}}/160</mat-hint>
-          <mat-error *ngIf="configwebsiteControl.invalid && configwebsiteControl.errors.required" translate>MANDATORY_COMMENT
-          </mat-error>
-        </mat-form-field>
         <div class="error" *ngIf="error">{{error}}</div>
         <div class="confirmation" [hidden]="!(confirmation && !messageControl.dirty)">{{ confirmation }}</div>
       </div>

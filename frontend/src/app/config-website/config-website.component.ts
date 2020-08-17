@@ -11,6 +11,7 @@ import { dom } from '@fortawesome/fontawesome-svg-core'
 import { FormControl, Validators } from '@angular/forms'
 import { FormSubmitService } from '../Services/form-submit.service'
 import { CookieService } from 'ngx-cookie-service'
+import { ActivatedRoute } from "@angular/router";
 
 dom.watch()
 
@@ -22,34 +23,37 @@ dom.watch()
 export class ConfigWebsiteComponent implements OnInit {
 
   public configwebsiteControl: FormControl = new FormControl('', [Validators.required, Validators.maxLength(160)])
-  public authorControl: FormControl = new FormControl('', [Validators.required, Validators.maxLength(160)])
+  public colorControl: FormControl = new FormControl('', [Validators.required, Validators.maxLength(160)])
   public messageControl: FormControl = new FormControl('', [Validators.required, Validators.maxLength(160)])
-  public feedback: any = undefined
   public confirmation: any
   public error: any
-  public guestbooks: any
-  public guestbook_content: any
+  public config: any
+  public colorValue: any
 
-  constructor (private configurationService: ConfigurationService, private cookieService: CookieService, private ConfigWebsiteService: ConfigWebsiteService, private sanitizer: DomSanitizer, private formSubmitService: FormSubmitService) {}
+  constructor (private route: ActivatedRoute, private configurationService: ConfigurationService, private cookieService: CookieService, private ConfigWebsiteService: ConfigWebsiteService, private sanitizer: DomSanitizer, private formSubmitService: FormSubmitService) {}
 
   ngOnInit () {
     this.cookieService.set('kikou-cookie', "hey")
-    this.feedback = {}
-    this.formSubmitService.attachEnterKeyHandler('guestbook-form', 'submitButton', () => this.save())
+    this.config = {}
+    this.formSubmitService.attachEnterKeyHandler('config-website-form', 'submitButton', () => this.save())
+    
+    this.route.queryParamMap.subscribe(queryParams => {
+      this.colorValue = queryParams.get("color")
+    })
+    
   }
 
   save () {
-    this.feedback.comment = `${this.configwebsiteControl.value}`
-    this.feedback.author = `${this.authorControl.value}`
+    this.config.color = `${this.colorControl.value}`
   
-    this.ConfigWebsiteService.save('<xml><root><comment>'+this.feedback.comment+'</comment><author>'+this.feedback.author+'</author></root></xml>').subscribe((savedFeedback) => {
-      this.confirmation = savedFeedback.reponse
-      this.feedback = {}
+    this.ConfigWebsiteService.save(this.config).subscribe((savedconfig) => {
+      this.confirmation = savedconfig.reponse
+      this.config = {}
       this.ngOnInit()
       this.resetForm()
     }, (err) => {
       console.log("mes erreurs" + err)
-      this.feedback = {}
+      this.config = {}
     })
   }
 
@@ -59,7 +63,7 @@ export class ConfigWebsiteComponent implements OnInit {
     this.configwebsiteControl.setValue('')
   }
 
-  muhaha () {
-    console.log('muhaha')
+  muhaha (coco) {
+    alert('votre couleur est: '+ coco)
   }
 }
