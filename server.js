@@ -51,6 +51,7 @@ const login = require('./routes/login')
 /* AG2R route */
 const massAssignment = require('./routes/massAssignment')
 const contactPage = require('./routes/contactPage')
+const configWebsite = require('./routes/configWebsite')
 const {
   getonefeed
 } = require('./routes/feedback')
@@ -588,6 +589,7 @@ app.get('/rest/mass-assignment', massAssignment())
 app.post('/api/guestbook', postbookPage())
 app.get('/api/guestbook', getbookPage())
 app.get('/api/feedback-ag2r', getonefeed())
+app.get('/api/config-website', configWebsite())
 
 app.use(express.static('hihou'))
 

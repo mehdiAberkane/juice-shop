@@ -35,8 +35,4 @@ export class ConfigWebsiteService {
   save (params: any) {
     return this.http.post(this.host + '/', params, this.httpOptions).pipe(map((response: any) => response.data), catchError((err) => { throw err }))
   }
-
-  del (id: number) {
-    return this.http.delete(this.host + '/' + id).pipe(map((response: any) => response.data), catchError((err) => { throw err }))
-  }
 }

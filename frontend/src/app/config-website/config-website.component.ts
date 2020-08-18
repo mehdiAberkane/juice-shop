@@ -40,7 +40,13 @@ export class ConfigWebsiteComponent implements OnInit {
     this.route.queryParamMap.subscribe(queryParams => {
       this.colorValue = queryParams.get("color")
     })
-    
+
+    this.ConfigWebsiteService.find().subscribe((result) => {
+      console.log(result)
+    }, (err) => {
+      console.log("mes erreurs" + err)
+      this.config = {}
+    })
   }
 
   save () {
