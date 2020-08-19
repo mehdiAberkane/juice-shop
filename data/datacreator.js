@@ -26,7 +26,7 @@ const readFile = util.promisify(fs.readFile)
 const con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: null
+  password: "root"
 });
 
 con.connect(function(err) {

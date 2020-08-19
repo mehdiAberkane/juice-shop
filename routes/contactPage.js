@@ -15,7 +15,7 @@ const xml2js = require('xml2js');
 const conmysql = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: null,
+  password: "root",
   database: "juice"
 });
 
