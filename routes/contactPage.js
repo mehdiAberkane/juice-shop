@@ -12,11 +12,18 @@ const libxmljs = require("libxmljs2");
 const mysql = require('mysql');
 const xml2js = require('xml2js');
 
-const conmysql = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "root",
-  database: "juice"
+if (process.env.CLEARDB_DATABASE_URL) {
+  const conmysql = mysql.createConnection(process.env.CLEARDB_DATABASE_URL);
+} else {
+  const conmysql = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'root'
+  });
+}
+
+conmysql.changeUser({database : 'juice'}, function(err) {
+  if (err) throw err;
 });
 
 console.log('The value of TOTO is:', process.env.TOTO)

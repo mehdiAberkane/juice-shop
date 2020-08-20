@@ -23,24 +23,29 @@ const entities = new Entities()
 const readFile = util.promisify(fs.readFile)
 
 //init db mysql
-const con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "root"
-});
+if (process.env.CLEARDB_DATABASE_URL) {
+  const con = mysql.createConnection(process.env.CLEARDB_DATABASE_URL);
+} else {
+  const con = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'root'
+  });
+}
 
 con.connect(function(err) {
   if (err) {
     console.log(err)
+  } else {
+    console.log("Connected!")
   }
-  console.log("Connected!")
 
   con.query("CREATE DATABASE IF NOT EXISTS juice", function (err, result) {
     if (err) {
       console.log(err)
+    } else {
+      console.log("Database created")
     }
-
-    console.log("Database created")
 
     con.changeUser({database : 'juice'}, function(err) {
       if (err) {
@@ -53,28 +58,13 @@ con.connect(function(err) {
     con.query(sql, function (err, result) {
       if (err) {
         console.log(err)
+      } {
+        console.log("Table created");
       }
-      console.log("Table created");
     });
-
   });
 });
-/*
 
-con.connect(function(err) {
-  if (err) {
-    console.log(err)
-  }
-  console.log("Connected!");
-  var sql = "CREATE TABLE user (name VARCHAR(255), email VARCHAR(255))";
-  con.query(sql, function (err, result) {
-    if (err) {
-      console.log(err)
-    }
-    console.log("Table created");
-  });
-});
-*/
 function loadStaticData (file) {
   const filePath = path.resolve('./data/static/' + file + '.yml')
   return readFile(filePath, 'utf8')
