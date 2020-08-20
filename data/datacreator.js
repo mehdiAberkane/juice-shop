@@ -22,6 +22,7 @@ const entities = new Entities()
 
 const readFile = util.promisify(fs.readFile)
 
+
 //init db mysql
 
 if (process.env.CLEARDB_DATABASE_URL) {
@@ -42,6 +43,14 @@ con.connect(function(err) {
     console.log("Connected!")
   }
 
+  if (!process.env.CLEARDB_DATABASE_URL) {
+    con.changeUser({database : 'juice'}, function(err) {
+      if (err) {
+        console.log(err)
+      }
+    });
+  }
+
   con.query("CREATE TABLE IF NOT EXISTS user (name VARCHAR(255), email VARCHAR(255))", function (err, result) {
     if (err) {
       console.log(err)
@@ -50,6 +59,7 @@ con.connect(function(err) {
       console.log("Database created")
     }
   });
+  con.end()
 });
 
 function loadStaticData (file) {
