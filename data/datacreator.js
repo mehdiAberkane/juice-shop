@@ -48,7 +48,7 @@ con.connect(function(err) {
     } else {
       console.log("Database created")
     }
-
+    /*
     con.changeUser({database : 'juice'}, function(err) {
       if (err) {
         console.log(err)
@@ -64,6 +64,8 @@ con.connect(function(err) {
         console.log("Table created");
       }
     });
+    */
+
   });
 });
 
