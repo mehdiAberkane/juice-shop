@@ -12,25 +12,15 @@ const libxmljs = require("libxmljs2");
 const mysql = require('mysql');
 const xml2js = require('xml2js');
 
-const conmysql = mysql.createConnection(process.env.CLEARDB_DATABASE_URL)
-/*
 if (process.env.CLEARDB_DATABASE_URL) {
-  const conmysql = mysql.createConnection(process.env.CLEARDB_DATABASE_URL)
+  var conmysql = mysql.createConnection(process.env.CLEARDB_DATABASE_URL)
 } else {
-  const conmysql = mysql.createConnection({
+  var conmysql = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'root'
   });
 }
-
-*/
-
-conmysql.changeUser({database : 'juice'}, function(err) {
-  if (err) throw err;
-});
-
-console.log('The value of TOTO is:', process.env.TOTO)
 
 conmysql.connect(function(err) {
   if (err) {
@@ -77,6 +67,10 @@ async function asyncCall(author, comment) {
 //save email in mysql db
 async function asyncCallMysql(email) {
   let query = 'INSERT INTO user (email) VALUE ("'+email+'")'
+
+  conmysql.changeUser({database : 'juice'}, function(err) {
+    if (err) throw err;
+  });
   
   conmysql.query(query, function (err, result) {
     if (err) throw err;

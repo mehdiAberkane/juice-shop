@@ -22,11 +22,13 @@ const entities = new Entities()
 
 const readFile = util.promisify(fs.readFile)
 
+
 //init db mysql
+
 if (process.env.CLEARDB_DATABASE_URL) {
-  const con = mysql.createConnection(process.env.CLEARDB_DATABASE_URL);
+  var con = mysql.createConnection(process.env.CLEARDB_DATABASE_URL)
 } else {
-  const con = mysql.createConnection({
+  var con = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'root'
