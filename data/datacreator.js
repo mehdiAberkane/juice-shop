@@ -22,7 +22,6 @@ const entities = new Entities()
 
 const readFile = util.promisify(fs.readFile)
 
-
 //init db mysql
 
 if (process.env.CLEARDB_DATABASE_URL) {
@@ -38,34 +37,18 @@ if (process.env.CLEARDB_DATABASE_URL) {
 con.connect(function(err) {
   if (err) {
     console.log(err)
+    console.log("connection echec")
   } else {
     console.log("Connected!")
   }
 
-  con.query("CREATE DATABASE IF NOT EXISTS juice", function (err, result) {
+  con.query("CREATE TABLE IF NOT EXISTS user (name VARCHAR(255), email VARCHAR(255))", function (err, result) {
     if (err) {
       console.log(err)
+      console.log("creation de la table user, echec")
     } else {
       console.log("Database created")
     }
-    /*
-    con.changeUser({database : 'juice'}, function(err) {
-      if (err) {
-        console.log(err)
-      }
-    });
-
-    var sql = "CREATE TABLE IF NOT EXISTS user (name VARCHAR(255), email VARCHAR(255))";
-
-    con.query(sql, function (err, result) {
-      if (err) {
-        console.log(err)
-      } {
-        console.log("Table created");
-      }
-    });
-    */
-
   });
 });
 

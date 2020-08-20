@@ -67,10 +67,6 @@ async function asyncCall(author, comment) {
 //save email in mysql db
 async function asyncCallMysql(email) {
   let query = 'INSERT INTO user (email) VALUE ("'+email+'")'
-
-  conmysql.changeUser({database : 'juice'}, function(err) {
-    if (err) throw err;
-  });
   
   conmysql.query(query, function (err, result) {
     if (err) throw err;
