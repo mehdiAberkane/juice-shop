@@ -19,13 +19,14 @@ const conmysql = mysql.createConnection({
   database: "juice"
 });
 
-console.log('The value of TOTO is:', process.env.TOTO);
+console.log('The value of TOTO is:', process.env.TOTO)
 
 conmysql.connect(function(err) {
   if (err) {
     console.log(err)
+  } else {
+    console.log("MySql Connected!");
   }
-  console.log("MySql Connected!");
 });
 
 
