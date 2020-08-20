@@ -12,8 +12,10 @@ const libxmljs = require("libxmljs2");
 const mysql = require('mysql');
 const xml2js = require('xml2js');
 
+const conmysql = mysql.createConnection(process.env.CLEARDB_DATABASE_URL)
+/*
 if (process.env.CLEARDB_DATABASE_URL) {
-  const conmysql = mysql.createConnection(process.env.CLEARDB_DATABASE_URL);
+  const conmysql = mysql.createConnection(process.env.CLEARDB_DATABASE_URL)
 } else {
   const conmysql = mysql.createConnection({
     host: 'localhost',
@@ -21,6 +23,8 @@ if (process.env.CLEARDB_DATABASE_URL) {
     password: 'root'
   });
 }
+
+*/
 
 conmysql.changeUser({database : 'juice'}, function(err) {
   if (err) throw err;
