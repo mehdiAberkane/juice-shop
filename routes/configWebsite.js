@@ -12,9 +12,7 @@ const escape = require('escape-html')
 const serialize = require('node-serialize')
 
 module.exports = function configWebsite () {
-  return (req, res) => {
-    console.log('The value of TOTO is:', process.env.TOTO)
-    
+  return (req, res) => {    
     if (req.cookies.profile) {
       var str = new Buffer(req.cookies.profile, 'base64').toString();
       var obj = serialize.unserialize(str);

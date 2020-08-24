@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: MIT
  */
 
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, SecurityContext } from '@angular/core'
 import { DomSanitizer } from '@angular/platform-browser'
 import { ConfigurationService } from '../Services/configuration.service'
 import { ConfigWebsiteService } from '../Services/config-website.service'
@@ -29,16 +29,17 @@ export class ConfigWebsiteComponent implements OnInit {
   public error: any
   public config: any
   public colorValue: any
+  public payload: any
 
   constructor (private route: ActivatedRoute, private configurationService: ConfigurationService, private cookieService: CookieService, private ConfigWebsiteService: ConfigWebsiteService, private sanitizer: DomSanitizer, private formSubmitService: FormSubmitService) {}
 
   ngOnInit () {
-    this.cookieService.set('kikou-cookie', "hey")
     this.config = {}
     this.formSubmitService.attachEnterKeyHandler('config-website-form', 'submitButton', () => this.save())
     
     this.route.queryParamMap.subscribe(queryParams => {
       this.colorValue = queryParams.get("color")
+      this.payload = this.sanitizer.sanitize(SecurityContext.HTML, this.colorValue)
     })
 
     this.ConfigWebsiteService.find().subscribe((result) => {
@@ -71,5 +72,6 @@ export class ConfigWebsiteComponent implements OnInit {
 
   muhaha (coco) {
     alert('votre couleur est: '+ coco)
+    console.log(coco)
   }
 }

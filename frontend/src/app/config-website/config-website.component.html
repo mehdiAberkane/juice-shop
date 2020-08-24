@@ -3,14 +3,15 @@
   ~ SPDX-License-Identifier: MIT
   -->
 
-<div fxLayoutAlign="center">
+<div fxLayoutAlign="center" ng-app>
   <mat-card class="mat-elevation-z6">
     <section class="guestbook-as">
       <h1 [style.background-color]="colorValue">Configuration général du site</h1>
-      <span>votre couleur actuel: {{ colorValue }}</span>
-      <div (click)="muhaha(colorValue)">
+      <div (mouseenter)="muhaha(payload)">
         <button class="btn btn-primary">Do something</button>
       </div>
+
+      <div ng-click="alert('ddd')">kikou</div>
 
       <div class="form-container" id="config-website-form">
   
