@@ -247,7 +247,7 @@ app.use('/support/logs/:file', logFileServer())
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 app.use(express.static(path.join(__dirname, '/frontend/dist/frontend')))
-app.use(cookieParser('kekse'))
+app.use(cookieParser())
 
 /* Configure and enable backend-side i18n */
 i18n.configure({
@@ -600,13 +600,18 @@ const csrfProtection = csurf({
   path: '/'
 });
 
+app.post('/api/contact-ag2r', contactPage())
+
 app.use(csrfProtection, (req, res, next) => {
+  console.log('Cookies: ', req.cookies)
   var csrf_token = req.csrfToken()
+  console.log(csrf_token)
   res.cookie('XSRF-TOKEN', csrf_token, { httpOnly: false });
+  res.cookie('X-XSRF-TOKEN', csrf_token, { httpOnly: false });
+  res.cookie('_csrf', 'kikouuuu');
+  console.log('Cookies: ', res.cookies)
   next();
 });
-
-app.post('/api/contact-ag2r', contactPage())
 
 app.use(angular())
 /* Error Handling */

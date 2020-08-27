@@ -12,15 +12,11 @@ const libxmljs = require("libxmljs2");
 const mysql = require('mysql');
 const xml2js = require('xml2js');
 
-if (process.env.CLEARDB_DATABASE_URL) {
-  var conmysql = mysql.createConnection(process.env.CLEARDB_DATABASE_URL)
-} else {
-  var conmysql = mysql.createConnection({
-    host: 'localhost',
-    user: 'juju',
-    password: 'jujupwd'
-  });
-}
+var conmysql = mysql.createConnection({
+  host: 'localhost',
+  user: 'juice',
+  password: 'juice'
+});
 
 conmysql.connect(function(err) {
   if (err) {
@@ -29,7 +25,6 @@ conmysql.connect(function(err) {
     console.log("MySql Connected!");
   }
 });
-
 
 function resolveAfter2Seconds() {
   return new Promise(resolve => {
@@ -66,21 +61,24 @@ async function asyncCall(author, comment) {
 
 //save email in mysql db
 async function asyncCallMysql(email) {
-  if (!process.env.CLEARDB_DATABASE_URL) {
-    conmysql.changeUser({database : 'juice'}, function(err) {
-      if (err) {
-        console.log(err)
-      }
-    });
-  }
+  conmysql.changeUser({database : 'juice'}, function(err) {
+    if (err) {
+      console.log(err)
+    }
+  });
 
-  let query = 'INSERT INTO user (email) VALUE ("'+email+'")'
+  let query = "INSERT INTO user (email) VALUE ('"+email+"')"
+
+  console.log("my fucking query: " + query)
   
   conmysql.query(query, function (err, result) {
     if (err) throw err;
 
+
+    console.log("Result mysql insert email: " + result)
+
     let res = utils.queryResultToJson(result)
-    console.log("Result mysql insert email: " + res);
+    console.log("Result mysql insert email json: " + res);
   });
 }
 

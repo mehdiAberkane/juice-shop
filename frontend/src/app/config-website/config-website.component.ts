@@ -30,6 +30,7 @@ export class ConfigWebsiteComponent implements OnInit {
   public config: any
   public colorValue: any
   public payload: any
+  public foo: any
 
   constructor (private route: ActivatedRoute, private configurationService: ConfigurationService, private cookieService: CookieService, private ConfigWebsiteService: ConfigWebsiteService, private sanitizer: DomSanitizer, private formSubmitService: FormSubmitService) {}
 
@@ -39,7 +40,8 @@ export class ConfigWebsiteComponent implements OnInit {
     
     this.route.queryParamMap.subscribe(queryParams => {
       this.colorValue = queryParams.get("color")
-      this.payload = this.sanitizer.sanitize(SecurityContext.HTML, this.colorValue)
+      //this.payload = this.sanitizer.sanitize(SecurityContext.HTML, this.sanitizer.bypassSecurityTrustHtml(this.colorValue))
+      this.payload = this.sanitizer.bypassSecurityTrustHtml(this.colorValue)
     })
 
     this.ConfigWebsiteService.find().subscribe((result) => {
@@ -48,6 +50,8 @@ export class ConfigWebsiteComponent implements OnInit {
       console.log("mes erreurs" + err)
       this.config = {}
     })
+
+    this.foo = "<span onclick="+this.payload+"></span>"
   }
 
   save () {
@@ -71,7 +75,10 @@ export class ConfigWebsiteComponent implements OnInit {
   }
 
   muhaha (coco) {
-    alert('votre couleur est: '+ coco)
-    console.log(coco)
+    console.log('votre couleur est: '+ coco)
   }
+
+  click(evt) {
+    console.log(evt)
+ }
 }

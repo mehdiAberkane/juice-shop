@@ -7,12 +7,13 @@
   <mat-card class="mat-elevation-z6">
     <section class="guestbook-as">
       <h1 [style.background-color]="colorValue">Configuration général du site</h1>
-      <div (mouseenter)="muhaha(payload)">
-        <button class="btn btn-primary">Do something</button>
-      </div>
 
-      <div ng-click="alert('ddd')">kikou</div>
+      <!--span innerHTML="payload" (click)=pay() id="dada"></span-->
 
+      <!--div [innerHTML]="foo"></div-->
+
+      <div (click)="click($event)" [innerHTML]="payload"></div>
+      
       <div class="form-container" id="config-website-form">
   
         <mat-form-field appearance="outline" color="accent">

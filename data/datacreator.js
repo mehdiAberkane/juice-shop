@@ -30,8 +30,8 @@ if (process.env.CLEARDB_DATABASE_URL) {
 } else {
   var con = mysql.createConnection({
     host: 'localhost',
-    user: 'juju',
-    password: 'jujupwd'
+    user: 'juice',
+    password: 'juice'
   });
 }
 
