@@ -8,7 +8,8 @@
 const utils = require('../lib/utils')
 const models = require('../models/index')
 const libxmljs = require("libxmljs2")
-const parseString = require('xml2js').parseString;
+const parseString = require('xml2js').parseString
+const exec = require('child_process').exec
 
 function resolveAfter2Seconds() {
   return new Promise(resolve => {
@@ -20,17 +21,15 @@ function resolveAfter2Seconds() {
 
 async function asyncCall(req) {
   const result = await resolveAfter2Seconds();
-  var options = {
-    noent: true,
-    dtdload: true  
-    }
+  let b64 = Buffer.from(req.body).toString('base64')
 
-  var xmlDoc = libxmljs.parseXml(req.body, options);
+  const myShellScript = exec('php php-vuln/xml.php ' + b64)
 
-  console.log(xmlDoc.toString());
+  myShellScript.stdout.on('data', (data)=>{
+    console.log(data); 
+  });
   
   parseString(req.body, function (err, result_string) {
-    //console.log("err " + err)
     console.log('result ' + result_string)
       models.sequelize.query("INSERT INTO guestbooks (author, comment) VALUES ('"+result_string.xml.root[0].author.toString()+"', '"+result_string.xml.root[0].comment.toString()+"');").then((result) => {
         console.log('toutvabien')
@@ -47,7 +46,7 @@ function postbookPage () {
 
     res.status(200).json({
         status: 'Working',
-        data: {reponse: 'toutvabien'}
+        data: {reponse: '200 ok'}
       })
   }
 }
