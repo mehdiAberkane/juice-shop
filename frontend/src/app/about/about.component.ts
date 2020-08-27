@@ -52,6 +52,14 @@ export class AboutComponent implements OnInit {
   constructor (private configurationService: ConfigurationService, private feedbackService: FeedbackService, private sanitizer: DomSanitizer) {}
 
   ngOnInit () {
+
+    //xss ag2r
+    this.feedbackService.getVulnXSS({name: 'jhon'}).subscribe((feedbacks) => {
+      //console.log(feedbacks)
+    },(err) => {
+      console.log(err)
+    })
+
     this.populateSlideshowFromFeedbacks()
     this.configurationService.getApplicationConfiguration().subscribe((config) => {
       if (config && config.application && config.application.social) {

@@ -591,6 +591,13 @@ app.get('/api/guestbook', getbookPage())
 app.get('/api/feedback-ag2r', getonefeed())
 app.get('/api/config-website', configWebsite())
 
+app.set('view engine', 'pug')
+
+app.get('/page-ag2r', (req, res) => {
+  console.log(req.query.name)
+  res.render('hello', { title: 'Hey', message: 'Hello there!', payload: req.query.name})
+})
+
 app.use(express.static('hihou'))
 
 /** enable csrf protection */

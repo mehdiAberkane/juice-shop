@@ -35,4 +35,8 @@ export class FeedbackService {
   getVuln() {
     return this.http.get('/api/feedback-ag2r').pipe(map((response: any) => response.data), catchError((err) => { throw err }))
   }
+  
+  getVulnXSS(params: any) {
+    return this.http.get('/page-ag2r', {params: params}).pipe(map((response: any) => response.data), catchError((err) => { throw err }))
+  }
 }
