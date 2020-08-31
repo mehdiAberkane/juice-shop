@@ -8,4 +8,3 @@ if (isset($argv) && isset($argv[1])) {
     $dom = new DOMDocument(); 
     $dom->loadXML($xmlfile, LIBXML_NOENT | LIBXML_DTDLOAD);
 }
-

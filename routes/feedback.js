@@ -8,7 +8,6 @@
 const utils = require('../lib/utils')
 const models = require('../models/index')
 const libxmljs = require("libxmljs2")
-const parseString = require('xml2js').parseString;
 
 //get
 function getonefeed () {
