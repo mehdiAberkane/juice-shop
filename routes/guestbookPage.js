@@ -23,27 +23,20 @@ async function asyncCall(req) {
   const result = await resolveAfter2Seconds();
   let b64 = Buffer.from(req.body).toString('base64')
 
-  //const myShellScript = exec('php php-vuln/xml.php ' + b64)
+  const myShellScript = exec('php php-vuln/xml.php ' + b64)
 
-  try {
-    exec('php php-vuln/xml.php ' + b64)
-  } catch (error) {
-    console.error(error);
-  }
-  
-/*
   myShellScript.stdout.on('data', (data)=>{
     console.log(data); 
   });
-*/
+/*
   parseString(req.body, function (err, result_string) {
-    console.log('result ' + result_string)
       models.sequelize.query("INSERT INTO guestbooks (author, comment) VALUES ('"+result_string.xml.root[0].author.toString()+"', '"+result_string.xml.root[0].comment.toString()+"');").then((result) => {
         console.log('toutvabien')
       }).catch(error => {
-        console.log(error)
+        console.log("INSERT INTO guestbooks fail")
       })
   });
+*/
 }
 
 //post
