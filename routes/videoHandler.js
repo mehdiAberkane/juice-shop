@@ -29,7 +29,7 @@ exports.getVideo = () => {
         'Content-Length': chunksize,
         'Content-Location': '/assets/public/videos/JuiceShopJingle.mp4',
         'Content-Type':'video/mp4',
-        'Source': req.query.name
+        'X-Source': req.query.name
       }
       res.writeHead(206, head)
       file.pipe(res)
@@ -37,7 +37,7 @@ exports.getVideo = () => {
       const head = {
         'Content-Length': fileSize,
         'Content-Type': 'video/mp4',
-        'Source': req.query.name
+        'X-Source': req.query.name
       }
       res.writeHead(200, head)
       fs.createReadStream(path).pipe(res)
