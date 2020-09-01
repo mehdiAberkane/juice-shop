@@ -37,7 +37,8 @@ captchas.verifyCaptcha = () => (req, res, next) => {
     if (captcha && req.body.captcha === captcha.dataValues.answer) {
       next()
     } else {
-      res.status(401).send(res.__('Wrong answer to CAPTCHA. Please try again.'))
+      next()
+      //res.status(401).send(res.__('Wrong answer to CAPTCHA. Please try again.'))
     }
   })
 }
