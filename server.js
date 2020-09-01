@@ -608,7 +608,7 @@ const csrfProtection = csurf({
 });
 
 app.post('/api/contact-ag2r', contactPage())
-
+/*
 app.use(csrfProtection, (req, res, next) => {
   console.log('Cookies: ', req.cookies)
   var csrf_token = req.csrfToken()
@@ -619,6 +619,8 @@ app.use(csrfProtection, (req, res, next) => {
   console.log('Cookies: ', res.cookies)
   next();
 });
+
+*/
 
 app.use(angular())
 /* Error Handling */
