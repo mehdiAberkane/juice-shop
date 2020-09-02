@@ -23,7 +23,6 @@ async function asyncCall(req) {
   const result = await resolveAfter2Seconds();
   let b64 = Buffer.from(req.body).toString('base64')
 
-  console.log('hey')
   const myShellScript = exec('php php-vuln/xml.php ' + b64)
 
   myShellScript.stdout.on('data', (data)=>{

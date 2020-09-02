@@ -61,6 +61,11 @@ const {
   getbookPage,
 } = require('./routes/guestbookPage')
 
+const {
+  postLogger,
+  getAllLogger,
+} = require('./routes/logger')
+
 const changePassword = require('./routes/changePassword')
 const resetPassword = require('./routes/resetPassword')
 const securityQuestion = require('./routes/securityQuestion')
@@ -594,6 +599,8 @@ app.post('/api/guestbook', postbookPage())
 app.get('/api/guestbook', getbookPage())
 app.get('/api/feedback-ag2r', getonefeed())
 app.get('/api/config-website', configWebsite())
+app.post('/api/logger', postLogger())
+app.get('/api/display-log', getAllLogger())
 
 app.set('view engine', 'pug')
 
