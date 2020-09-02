@@ -140,7 +140,13 @@ const uploadToDisk = multer({
   })
 })
 
+app.use(function (req, res, next) {
+  if (req.method != 'GET') {
+    console.log(req.url, req.method);
+  }
 
+  next();
+});
 
 errorhandler.title = `${config.get('application.name')} (Express ${utils.version('express')})`
 
@@ -258,8 +264,6 @@ i18n.configure({
   autoReload: true
 })
 app.use(i18n.init)
-
-
 
 app.use(bodyParser.urlencoded({ extended: true }))
 /* File Upload */
@@ -607,20 +611,19 @@ const csrfProtection = csurf({
   path: '/'
 });
 
-app.post('/api/contact-ag2r', contactPage())
 /*
 app.use(csrfProtection, (req, res, next) => {
-  console.log('Cookies: ', req.cookies)
-  var csrf_token = req.csrfToken()
-  console.log(csrf_token)
-  res.cookie('XSRF-TOKEN', csrf_token, { httpOnly: false });
-  res.cookie('X-XSRF-TOKEN', csrf_token, { httpOnly: false });
-  res.cookie('_csrf', 'kikouuuu');
-  console.log('Cookies: ', res.cookies)
+  res.cookie('XSRF-TOKEN', req.csrfToken());
   next();
 });
-
 */
+
+app.all(csrfProtection, function (req, res, next) {
+  res.cookie('XSRF-TOKEN', req.csrfToken())
+  next()
+})
+
+app.post('/api/contact-ag2r', contactPage())
 
 app.use(angular())
 /* Error Handling */
