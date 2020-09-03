@@ -11,10 +11,15 @@ const config = require('config')
 
 module.exports = function massAssignment () {
   return (req, res, next) => {
-    console.log('kikou')
-    res.status(200).json({
-        status: 'Coucou',
-        data: {}
+    models.sequelize.query("SELECT * FROM Products where name LIKE '"+req.body.name+"%'").then((results) => {
+      var datahacked = utils.queryResultToJson(results)
+
+      res.status(200).json({
+        status: 'Working',
+        data: {reponse: datahacked.data[0]}
       })
+    }).catch(error => {
+      console.log(error)
+    })
   }
 }

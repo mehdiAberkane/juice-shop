@@ -39,10 +39,8 @@ function getAllLogger () {
     if (typeof req.cookies.ag2r !== 'undefined' && req.cookies.ag2r == 'admin_mode') {
       models.sequelize.query("SELECT * FROM loggers").then((results) => {
         const data = utils.queryResultToJson(results)
-  
-        console.log(data.data[0])
-        
-        res.render('logger', { title: 'Hey', message: 'Hello there!', data: data.data[0]});
+          
+        res.render('logger', { title: 'Logger Page', message: 'Logger Page', data: data.data[0]});
   
       }).catch(error => {
         console.log(error)

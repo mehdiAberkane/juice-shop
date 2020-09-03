@@ -16,6 +16,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 import { TranslateService } from '@ngx-translate/core'
 import { SocketIoService } from '../Services/socket-io.service'
 import { SnackBarHelperService } from '../Services/snack-bar-helper.service'
+import { FeedbackService } from '../Services/feedback.service'
 
 import { dom, library } from '@fortawesome/fontawesome-svg-core'
 import { faCartPlus, faEye } from '@fortawesome/free-solid-svg-icons'
@@ -56,12 +57,16 @@ export class SearchResultComponent implements OnDestroy, AfterViewInit {
   public breakpoint: number = 6
   public emptyState = false
 
-  constructor (private deluxeGuard: DeluxeGuard, private dialog: MatDialog, private productService: ProductService,
+  constructor (private deluxeGuard: DeluxeGuard, private feedbackService: FeedbackService, private dialog: MatDialog, private productService: ProductService,
    private quantityService: QuantityService, private basketService: BasketService, private translateService: TranslateService,
    private router: Router, private route: ActivatedRoute, private sanitizer: DomSanitizer, private ngZone: NgZone, private io: SocketIoService,
    private snackBarHelperService: SnackBarHelperService, private cdRef: ChangeDetectorRef) { }
 
   ngAfterViewInit () {
+    this.feedbackService.setLog({log: 'search page is watch'}).subscribe((log) => {
+      console.log(log)
+    })
+    
     const products = this.productService.search('')
     const quantities = this.quantityService.getAll()
     forkJoin([quantities, products]).subscribe(([quantities, products]) => {

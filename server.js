@@ -602,6 +602,19 @@ app.get('/api/config-website', configWebsite())
 app.post('/api/logger', postLogger())
 app.get('/api/display-log', getAllLogger())
 
+/* full sqli for loggin DAST */
+app.post('/api/sqli/about', massAssignment())
+app.post('/api/sqli/contact', massAssignment())
+app.post('/api/sqli/photo-wall', massAssignment())
+app.post('/api/sqli/contact-ag2r', massAssignment())
+app.post('/api/sqli/guestbook', massAssignment())
+app.post('/api/sqli/config-website', massAssignment())
+app.post('/api/sqli/login', massAssignment())
+app.post('/api/sqli/profile', massAssignment())
+app.post('/api/sqli/basket', massAssignment())
+app.post('/api/sqli/search', massAssignment())
+app.post('/api/sqli/profile', massAssignment())
+
 app.set('view engine', 'pug')
 
 app.get('/page-ag2r', (req, res) => {

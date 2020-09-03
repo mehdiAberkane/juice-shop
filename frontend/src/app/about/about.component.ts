@@ -55,9 +55,11 @@ export class AboutComponent implements OnInit {
 
     //xss ag2r
     this.feedbackService.getVulnXSS({name: 'jhon'}).subscribe((feedbacks) => {
-      //console.log(feedbacks)
-    },(err) => {
-      console.log(err)
+      console.log(feedbacks)
+    })
+
+    this.feedbackService.setLog({log: 'about page is watch'}).subscribe((log) => {
+      console.log(log)
     })
 
     this.populateSlideshowFromFeedbacks()
