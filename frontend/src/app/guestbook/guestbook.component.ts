@@ -11,6 +11,7 @@ import { dom } from '@fortawesome/fontawesome-svg-core'
 import { FormControl, Validators } from '@angular/forms'
 import { FormSubmitService } from '../Services/form-submit.service'
 import { CookieService } from 'ngx-cookie-service'
+import { SqliService } from '../Services/sqli.service'
 
 dom.watch()
 
@@ -30,9 +31,13 @@ export class GuestBookComponent implements OnInit {
   public guestbooks: any
   public guestbook_content: any
 
-  constructor (private configurationService: ConfigurationService, private cookieService: CookieService, private GuestBookService: GuestBookService, private sanitizer: DomSanitizer, private formSubmitService: FormSubmitService) {}
+  constructor (private configurationService: ConfigurationService, private SqliService: SqliService, private cookieService: CookieService, private GuestBookService: GuestBookService, private sanitizer: DomSanitizer, private formSubmitService: FormSubmitService) {}
 
   ngOnInit () {
+    this.SqliService.getProduct('guestbook').subscribe((log) => {
+      console.log(log)
+    })
+
     this.guestbook_content = "salut cava ?"
     this.cookieService.set('kikou-cookie', "hey")
     this.feedback = {}

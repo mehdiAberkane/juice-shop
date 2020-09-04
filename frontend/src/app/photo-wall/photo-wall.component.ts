@@ -12,6 +12,7 @@ import { ConfigurationService } from '../Services/configuration.service'
 import { dom, library } from '@fortawesome/fontawesome-svg-core'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { SnackBarHelperService } from '../Services/snack-bar-helper.service'
+import { SqliService } from '../Services/sqli.service'
 
 library.add(faTwitter)
 dom.watch()
@@ -32,10 +33,14 @@ export class PhotoWallComponent implements OnInit {
   public slideshowDataSource: IImage[] = []
   public twitterHandle = null
 
-  constructor (private photoWallService: PhotoWallService, private configurationService: ConfigurationService,
+  constructor (private photoWallService: PhotoWallService, private SqliService: SqliService, private configurationService: ConfigurationService,
     private snackBarHelperService: SnackBarHelperService) { }
 
   ngOnInit () {
+    this.SqliService.getProduct('photo-wall').subscribe((log) => {
+      console.log(log)
+    })
+
     this.slideshowDataSource = []
     this.photoWallService.get().subscribe((memories) => {
       if (memories.length === 0) {

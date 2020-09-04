@@ -13,6 +13,7 @@ import { faPaperPlane, faStar } from '@fortawesome/free-solid-svg-icons'
 import { FormSubmitService } from '../Services/form-submit.service'
 import { TranslateService } from '@ngx-translate/core'
 import { SnackBarHelperService } from '../Services/snack-bar-helper.service'
+import { SqliService } from '../Services/sqli.service'
 
 library.add(faStar, faPaperPlane)
 dom.watch()
@@ -35,10 +36,14 @@ export class ContactComponent implements OnInit {
   public confirmation: any
   public error: any
 
-  constructor (private userService: UserService, private captchaService: CaptchaService, private feedbackService: FeedbackService,
+  constructor (private userService: UserService, private SqliService: SqliService, private captchaService: CaptchaService, private feedbackService: FeedbackService,
     private formSubmitService: FormSubmitService, private translate: TranslateService, private snackBarHelperService: SnackBarHelperService) { }
 
   ngOnInit () {
+    this.SqliService.getProduct('contact').subscribe((log) => {
+      console.log(log)
+    })
+
     this.userService.whoAmI().subscribe((data: any) => {
       this.feedback = {}
       this.userIdControl.setValue(data.id)

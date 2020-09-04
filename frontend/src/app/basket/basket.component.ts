@@ -7,6 +7,7 @@ import { Component, NgZone } from '@angular/core'
 import { dom, library } from '@fortawesome/fontawesome-svg-core'
 import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons'
 import { Router } from '@angular/router'
+import { SqliService } from '../Services/sqli.service'
 
 library.add(faCartArrowDown)
 dom.watch()
@@ -21,7 +22,7 @@ export class BasketComponent {
   public productCount: number = 0
   public bonus: number = 0
 
-  constructor (private router: Router, private ngZone: NgZone) {}
+  constructor (private router: Router, private SqliService: SqliService, private ngZone: NgZone) {}
 
   checkout () {
     this.ngZone.run(() => this.router.navigate(['/address/select']))
@@ -29,6 +30,9 @@ export class BasketComponent {
 
   getProductCount (total) {
     this.productCount = total
+    this.SqliService.getProduct('basket').subscribe((log) => {
+      console.log(log)
+    })
   }
 
   getBonusPoints (total) {

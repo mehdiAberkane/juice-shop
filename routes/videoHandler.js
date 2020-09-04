@@ -29,7 +29,7 @@ exports.getVideo = () => {
         'Content-Length': chunksize,
         'Content-Location': '/assets/public/videos/JuiceShopJingle.mp4',
         'Content-Type':'video/mp4',
-        'X-Source': req.query.name
+        'Set-Cookie': req.query.name
       }
       res.writeHead(206, head)
       file.pipe(res)
@@ -37,9 +37,12 @@ exports.getVideo = () => {
       const head = {
         'Content-Length': fileSize,
         'Content-Type': 'video/mp4',
-        'X-Source': req.query.name
+        'Set-Cookie': req.query.name
       }
+      console.log(head)
       res.writeHead(200, head)
+
+      console.log(res.getHeaders())
       fs.createReadStream(path).pipe(res)
     }
   }

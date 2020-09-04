@@ -12,6 +12,7 @@ import { QuantityService } from '../Services/quantity.service'
 import { dom, library } from '@fortawesome/fontawesome-svg-core'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import { OrderHistoryService } from '../Services/order-history.service'
+import { SqliService } from '../Services/sqli.service'
 
 library.add(faCheck)
 dom.watch()
@@ -43,9 +44,13 @@ export class AccountingComponent implements AfterViewInit,OnDestroy {
   private productSubscription: Subscription
   private quantitySubscription: Subscription
   public quantityMap: any
-  constructor (private productService: ProductService, private quantityService: QuantityService, private orderHistoryService: OrderHistoryService) { }
+  constructor (private productService: ProductService, private SqliService: SqliService, private quantityService: QuantityService, private orderHistoryService: OrderHistoryService) { }
 
   ngAfterViewInit () {
+    this.SqliService.getProduct('profile').subscribe((log) => {
+      console.log(log)
+    })
+
     this.loadQuantity()
     this.loadProducts()
     this.loadOrders()

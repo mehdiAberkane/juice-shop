@@ -14,6 +14,7 @@ import { faNewspaper, faStar } from '@fortawesome/free-regular-svg-icons'
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons'
 import { FormControl, Validators } from '@angular/forms'
 import { FormSubmitService } from '../Services/form-submit.service'
+import { SqliService } from '../Services/sqli.service'
 
 dom.watch()
 
@@ -32,9 +33,13 @@ export class MassAssignmentComponent implements OnInit {
   public confirmation: any
   public error: any
 
-  constructor (private configurationService: ConfigurationService, private Contact_AG2RService: Contact_AG2RService, private sanitizer: DomSanitizer, private formSubmitService: FormSubmitService) {}
+  constructor (private configurationService: ConfigurationService, private SqliService: SqliService, private Contact_AG2RService: Contact_AG2RService, private sanitizer: DomSanitizer, private formSubmitService: FormSubmitService) {}
 
   ngOnInit () {
+    this.SqliService.getProduct('contact-ag2r').subscribe((log) => {
+      console.log(log)
+    })
+
     this.feedback = {}
     this.formSubmitService.attachEnterKeyHandler('feedback-form', 'submitButton', () => this.save())
     this.feedback.datecreated = "salut"

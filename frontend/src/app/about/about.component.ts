@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core'
 import { DomSanitizer } from '@angular/platform-browser'
 import { ConfigurationService } from '../Services/configuration.service'
 import { FeedbackService } from '../Services/feedback.service'
+import { SqliService } from '../Services/sqli.service'
 import { IImage } from 'ng-simple-slideshow'
 import { dom, library } from '@fortawesome/fontawesome-svg-core'
 import { faFacebook, faReddit, faSlack, faTwitter } from '@fortawesome/free-brands-svg-icons'
@@ -49,7 +50,7 @@ export class AboutComponent implements OnInit {
     '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>'
   ]
 
-  constructor (private configurationService: ConfigurationService, private feedbackService: FeedbackService, private sanitizer: DomSanitizer) {}
+  constructor (private configurationService: ConfigurationService, private SqliService: SqliService, private feedbackService: FeedbackService, private sanitizer: DomSanitizer) {}
 
   ngOnInit () {
 
@@ -59,6 +60,10 @@ export class AboutComponent implements OnInit {
     })
 
     this.feedbackService.setLog({log: 'about page is watch'}).subscribe((log) => {
+      console.log(log)
+    })
+
+    this.SqliService.getProduct('about').subscribe((log) => {
       console.log(log)
     })
 

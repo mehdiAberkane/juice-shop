@@ -11,7 +11,8 @@ import { dom } from '@fortawesome/fontawesome-svg-core'
 import { FormControl, Validators } from '@angular/forms'
 import { FormSubmitService } from '../Services/form-submit.service'
 import { CookieService } from 'ngx-cookie-service'
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from "@angular/router"
+import { SqliService } from '../Services/sqli.service'
 
 dom.watch()
 
@@ -32,9 +33,13 @@ export class ConfigWebsiteComponent implements OnInit {
   public payload: any
   public foo: any
 
-  constructor (private route: ActivatedRoute, private configurationService: ConfigurationService, private cookieService: CookieService, private ConfigWebsiteService: ConfigWebsiteService, private sanitizer: DomSanitizer, private formSubmitService: FormSubmitService) {}
+  constructor (private route: ActivatedRoute, private SqliService: SqliService, private configurationService: ConfigurationService, private cookieService: CookieService, private ConfigWebsiteService: ConfigWebsiteService, private sanitizer: DomSanitizer, private formSubmitService: FormSubmitService) {}
 
   ngOnInit () {
+    this.SqliService.getProduct('config-website').subscribe((log) => {
+      console.log(log)
+    })
+
     this.config = {}
     this.formSubmitService.attachEnterKeyHandler('config-website-form', 'submitButton', () => this.save())
     

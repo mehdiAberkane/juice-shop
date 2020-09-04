@@ -41,7 +41,7 @@ async function asyncCall(author, comment) {
     console.log(projects)
   })
 
-  const result = await resolveAfter2Seconds()
+  //const result = await resolveAfter2Seconds()
   models.sequelize.query("INSERT INTO contact_ag2rs (author, comment) VALUES ('"+author+"', '"+comment+"');").then((result) => {
 
     /* TODO a faire marcher, load_extension

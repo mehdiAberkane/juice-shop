@@ -17,7 +17,7 @@ function resolveAfter2Seconds() {
 }
   
 async function asyncCall(req) {
-  const result = await resolveAfter2Seconds();
+  //const result = await resolveAfter2Seconds();
   await models.logger.create({log: req.body.log });
 }
   

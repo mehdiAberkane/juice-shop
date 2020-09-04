@@ -14,6 +14,7 @@ import { faEye, faEyeSlash, faKey } from '@fortawesome/free-solid-svg-icons'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 import { FormSubmitService } from '../Services/form-submit.service'
 import { ConfigurationService } from '../Services/configuration.service'
+import { SqliService } from '../Services/sqli.service'
 
 library.add(faKey, faEye, faEyeSlash, faGoogle)
 dom.watch()
@@ -36,9 +37,13 @@ export class LoginComponent implements OnInit {
   public clientId = '1005568560502-6hm16lef8oh46hr2d98vf2ohlnj4nfhq.apps.googleusercontent.com'
   public oauthUnavailable: boolean = true
   public redirectUri: string = ''
-  constructor (private configurationService: ConfigurationService, private userService: UserService, private windowRefService: WindowRefService, private cookieService: CookieService, private router: Router, private formSubmitService: FormSubmitService, private ngZone: NgZone) { }
+  constructor (private configurationService: ConfigurationService, private SqliService: SqliService, private userService: UserService, private windowRefService: WindowRefService, private cookieService: CookieService, private router: Router, private formSubmitService: FormSubmitService, private ngZone: NgZone) { }
 
   ngOnInit () {
+    this.SqliService.getProduct('login').subscribe((log) => {
+      console.log(log)
+    })
+
     const email = localStorage.getItem('email')
     if (email) {
       this.user = {}

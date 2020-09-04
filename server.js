@@ -594,7 +594,7 @@ app.get('/profile', insecurity.updateAuthenticatedUsers(), userProfile())
 app.post('/profile', updateUserProfile())
 
 /* Custom Restful API for AG2R */
-app.get('/rest/mass-assignment', massAssignment())
+//app.get('/rest/mass-assignment', massAssignment())
 app.post('/api/guestbook', postbookPage())
 app.get('/api/guestbook', getbookPage())
 app.get('/api/feedback-ag2r', getonefeed())
@@ -613,7 +613,6 @@ app.post('/api/sqli/login', massAssignment())
 app.post('/api/sqli/profile', massAssignment())
 app.post('/api/sqli/basket', massAssignment())
 app.post('/api/sqli/search', massAssignment())
-app.post('/api/sqli/profile', massAssignment())
 
 app.set('view engine', 'pug')
 
