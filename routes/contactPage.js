@@ -44,16 +44,6 @@ async function asyncCall(author, comment) {
   //const result = await resolveAfter2Seconds()
   models.sequelize.query("INSERT INTO contact_ag2rs (author, comment) VALUES ('"+author+"', '"+comment+"');").then((result) => {
 
-    /* TODO a faire marcher, load_extension
-    //check the data have been save 
-    //models.sequelize.query('SELECT * FROM contact_ag2rs WHERE author = "'+author+'" order by id desc LIMIT 1').then(([data]) => {
-    models.sequelize.query('select load_extension("//dsdsaaaddsd")').then(([data]) => {
-    //models.sequelize.query("attach database '/net/rc752wcuose5e4m5ifm4nodmjdpdd2.burpcollaborator.net/z' as z;").then(([data]) => {
-      const dataJson = utils.queryResultToJson(data)
-      console.log(dataJson)
-    })
-    */
-
   }).catch(error => {
     console.log(error)
   })
@@ -68,18 +58,13 @@ async function asyncCallMysql(email) {
   });
 
   let query = "INSERT INTO user (email) VALUE ('"+email+"')"
+  try {
 
-  console.log("my fucking query: " + query)
-  
-  conmysql.query(query, function (err, result) {
-    if (err) throw err;
-
-
-    console.log("Result mysql insert email: " + result)
-
-    let res = utils.queryResultToJson(result)
-    console.log("Result mysql insert email json: " + res);
-  });
+  } catch (er) {
+    conmysql.query(query, function (err, result) {
+      if (err) throw err;
+    });
+  }
 }
 
 module.exports = function contactPage () {
