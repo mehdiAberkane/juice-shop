@@ -66,6 +66,10 @@ const {
   getAllLogger,
 } = require('./routes/logger')
 
+const {
+  testFolder,
+} = require('./routes/exposeFile')
+
 const changePassword = require('./routes/changePassword')
 const resetPassword = require('./routes/resetPassword')
 const securityQuestion = require('./routes/securityQuestion')
@@ -616,11 +620,19 @@ app.post('/api/sqli/search', massAssignment())
 
 app.set('view engine', 'pug')
 
+
+const Entities = require('html-entities').XmlEntities;
+ 
+const entities = new Entities();
+
 app.get('/page-ag2r', (req, res) => {
-  console.log(req.query.name)
-  res.render('hello', { title: 'Hey', message: 'Hello there!', payload: req.query.name})
+  const payloadXss = entities.encode(req.query.name)
+  console.log(payloadXss)
+  res.render('hello', { title: 'Hey', message: 'Hello there!', payload: payloadXss})
 })
 
+
+app.get('/test', testFolder())
 app.use(express.static('hihou'))
 
 /** enable csrf protection */
