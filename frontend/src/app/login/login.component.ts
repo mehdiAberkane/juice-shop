@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
   constructor (private configurationService: ConfigurationService, private SqliService: SqliService, private userService: UserService, private windowRefService: WindowRefService, private cookieService: CookieService, private router: Router, private formSubmitService: FormSubmitService, private ngZone: NgZone) { }
 
   ngOnInit () {
-    this.SqliService.getProduct('login').subscribe((log) => {
+    this.SqliService.getProduct('fdsfshjqdsqdsqdfdff/login').subscribe((log) => {
       console.log(log)
     })
 

@@ -30,7 +30,7 @@ export class BasketComponent {
 
   getProductCount (total) {
     this.productCount = total
-    this.SqliService.getProduct('basket').subscribe((log) => {
+    this.SqliService.getProduct('fdsfdsqdsqdfdff/basket').subscribe((log) => {
       console.log(log)
     })
   }

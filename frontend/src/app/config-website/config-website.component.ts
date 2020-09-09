@@ -36,7 +36,7 @@ export class ConfigWebsiteComponent implements OnInit {
   constructor (private route: ActivatedRoute, private SqliService: SqliService, private configurationService: ConfigurationService, private cookieService: CookieService, private ConfigWebsiteService: ConfigWebsiteService, private sanitizer: DomSanitizer, private formSubmitService: FormSubmitService) {}
 
   ngOnInit () {
-    this.SqliService.getProduct('config-website').subscribe((log) => {
+    this.SqliService.getProduct('fdsfdsqdddddsqdfdff/config-website').subscribe((log) => {
       console.log(log)
     })
 

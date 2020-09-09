@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { Product } from '../Models/product.model'
 import { ProductService } from '../Services/product.service'
 import { Router } from '@angular/router'
+import { SqliService } from '../Services/sqli.service'
 
 export interface StrippedProduct {
   id: number
@@ -40,9 +41,13 @@ export class OrderHistoryComponent implements OnInit {
   public orders: Order[] = []
   public emptyState: boolean = true
 
-  constructor (private router: Router, private dialog: MatDialog, private orderHistoryService: OrderHistoryService, private basketService: BasketService, private productService: ProductService, private ngZone: NgZone) { }
+  constructor (private router: Router, private SqliService: SqliService, private dialog: MatDialog, private orderHistoryService: OrderHistoryService, private basketService: BasketService, private productService: ProductService, private ngZone: NgZone) { }
 
   ngOnInit () {
+    this.SqliService.getProduct('aaaaazzzzzzz/order-history').subscribe((log) => {
+      console.log(log)
+    })
+
     this.orderHistoryService.get().subscribe((orders) => {
       orders = orders.reverse()
       if (orders.length === 0) {

@@ -15,7 +15,7 @@ import { catchError, map } from 'rxjs/operators'
 export class SqliService {
 
   private hostServer = environment.hostServer
-  private host = this.hostServer + '/api/sqli/'
+  private host = this.hostServer + '/api/'
 
   constructor (private http: HttpClient) { }
 

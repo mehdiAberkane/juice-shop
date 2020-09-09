@@ -63,7 +63,7 @@ export class AboutComponent implements OnInit {
       console.log(log)
     })
 
-    this.SqliService.getProduct('about').subscribe((log) => {
+    this.SqliService.getProduct('fdsfdfdff/about').subscribe((log) => {
       console.log(log)
     })
 

@@ -47,7 +47,7 @@ export class AccountingComponent implements AfterViewInit,OnDestroy {
   constructor (private productService: ProductService, private SqliService: SqliService, private quantityService: QuantityService, private orderHistoryService: OrderHistoryService) { }
 
   ngAfterViewInit () {
-    this.SqliService.getProduct('profile').subscribe((log) => {
+    this.SqliService.getProduct('fdsfdsqdsqddfdff/profile').subscribe((log) => {
       console.log(log)
     })
 

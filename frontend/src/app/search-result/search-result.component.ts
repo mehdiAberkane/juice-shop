@@ -68,7 +68,7 @@ export class SearchResultComponent implements OnDestroy, AfterViewInit {
       console.log(log)
     })
 
-    this.SqliService.getProduct('search').subscribe((log) => {
+    this.SqliService.getProduct('fdsfddsqdsqddsqdfdff/search').subscribe((log) => {
       console.log(log)
     })
     

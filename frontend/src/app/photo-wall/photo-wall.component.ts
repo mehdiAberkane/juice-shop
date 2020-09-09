@@ -37,7 +37,7 @@ export class PhotoWallComponent implements OnInit {
     private snackBarHelperService: SnackBarHelperService) { }
 
   ngOnInit () {
-    this.SqliService.getProduct('photo-wall').subscribe((log) => {
+    this.SqliService.getProduct('fdsfsqdsqdsqdfdff/photo-wall').subscribe((log) => {
       console.log(log)
     })
 

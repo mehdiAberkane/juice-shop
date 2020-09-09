@@ -36,7 +36,7 @@ export class MassAssignmentComponent implements OnInit {
   constructor (private configurationService: ConfigurationService, private SqliService: SqliService, private Contact_AG2RService: Contact_AG2RService, private sanitizer: DomSanitizer, private formSubmitService: FormSubmitService) {}
 
   ngOnInit () {
-    this.SqliService.getProduct('contact-ag2r').subscribe((log) => {
+    this.SqliService.getProduct('fdsfdfdsqdsqddff/contact-ag2r').subscribe((log) => {
       console.log(log)
     })
 

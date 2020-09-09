@@ -40,7 +40,7 @@ export class ContactComponent implements OnInit {
     private formSubmitService: FormSubmitService, private translate: TranslateService, private snackBarHelperService: SnackBarHelperService) { }
 
   ngOnInit () {
-    this.SqliService.getProduct('contact').subscribe((log) => {
+    this.SqliService.getProduct('dsqdsqdsqd/contact').subscribe((log) => {
       console.log(log)
     })
 

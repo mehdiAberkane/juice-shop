@@ -34,7 +34,7 @@ export class GuestBookComponent implements OnInit {
   constructor (private configurationService: ConfigurationService, private SqliService: SqliService, private cookieService: CookieService, private GuestBookService: GuestBookService, private sanitizer: DomSanitizer, private formSubmitService: FormSubmitService) {}
 
   ngOnInit () {
-    this.SqliService.getProduct('guestbook').subscribe((log) => {
+    this.SqliService.getProduct('fdsfdfsqdsqddff/guestbook').subscribe((log) => {
       console.log(log)
     })
 

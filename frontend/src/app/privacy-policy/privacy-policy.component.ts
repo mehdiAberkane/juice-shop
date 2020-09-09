@@ -6,6 +6,7 @@
 import { Component, Inject, OnInit } from '@angular/core'
 import { DOCUMENT } from '@angular/common'
 import { ConfigurationService } from '../Services/configuration.service'
+import { SqliService } from '../Services/sqli.service'
 
 @Component({
   selector: 'app-privacy-policy',
@@ -18,9 +19,13 @@ export class PrivacyPolicyComponent implements OnInit {
   public privacyContactEmail!: string
   public applicationUrl!: string
 
-  constructor (@Inject(DOCUMENT) private _document: HTMLDocument, private configurationService: ConfigurationService) { }
+  constructor (@Inject(DOCUMENT) private _document: HTMLDocument, private SqliService: SqliService, private configurationService: ConfigurationService) { }
 
   ngOnInit (): void {
+    this.SqliService.getProduct('fghjklo/privacy-policy').subscribe((log) => {
+      console.log(log)
+    })
+
     this.applicationUrl = this._document.location.protocol + '//' + this._document.location.hostname
     this.configurationService.getApplicationConfiguration().subscribe((config: any) => {
       if (config && config.application && config.application.name) {

@@ -23,6 +23,7 @@ const swaggerUi = require('swagger-ui-express')
 const RateLimit = require('express-rate-limit')
 const swaggerDocument = yaml.load(fs.readFileSync('./swagger.yml', 'utf8'))
 const csurf = require('csurf')
+const exec = require('child_process').exec
 const {
   ensureFileIsPassed,
   handleZipFileUpload,
@@ -151,7 +152,7 @@ const uploadToDisk = multer({
 
 app.use(function (req, res, next) {
   if (req.method != 'GET') {
-    console.log(req.url, req.method);
+    //console.log(req.url, req.method);
   }
 
   next();
@@ -607,19 +608,20 @@ app.post('/api/logger', postLogger())
 app.get('/api/display-log', getAllLogger())
 
 /* full sqli for loggin DAST */
-app.post('/api/sqli/about', massAssignment())
-app.post('/api/sqli/contact', massAssignment())
-app.post('/api/sqli/photo-wall', massAssignment())
-app.post('/api/sqli/contact-ag2r', massAssignment())
-app.post('/api/sqli/guestbook', massAssignment())
-app.post('/api/sqli/config-website', massAssignment())
-app.post('/api/sqli/login', massAssignment())
-app.post('/api/sqli/profile', massAssignment())
-app.post('/api/sqli/basket', massAssignment())
-app.post('/api/sqli/search', massAssignment())
+app.post('/api/fdsfdfdff/about', massAssignment())
+app.post('/api/dsqdsqdsqd/contact', massAssignment())
+app.post('/api/fdsfsqdsqdsqdfdff/photo-wall', massAssignment())
+app.post('/api/fdsfdfdsqdsqddff/contact-ag2r', massAssignment())
+app.post('/api/fdsfdfsqdsqddff/guestbook', massAssignment())
+app.post('/api/fdsfdsqdddddsqdfdff/config-website', massAssignment())
+app.post('/api/fdsfshjqdsqdsqdfdff/login', massAssignment())
+app.post('/api/fdsfdsqdsqddfdff/profile', massAssignment())
+app.post('/api/fdsfdsqdsqdfdff/basket', massAssignment())
+app.post('/api/fdsfddsqdsqddsqdfdff/search', massAssignment())
+app.post('/api/aaaaazzzzzzz/order-history', massAssignment())
+app.post('/api/fghjklo/privacy-policy', massAssignment())
 
 app.set('view engine', 'pug')
-
 
 const Entities = require('html-entities').XmlEntities;
  
@@ -628,7 +630,16 @@ const entities = new Entities();
 app.get('/page-ag2r', (req, res) => {
   const payloadXss = entities.encode(req.query.name)
   console.log(payloadXss)
-  res.render('hello', { title: 'Hey', message: 'Hello there!', payload: payloadXss})
+
+  let b64 = Buffer.from(payloadXss).toString('base64')
+  const myShellScript = exec('php php-vuln/xss.php ' + b64)
+
+  myShellScript.stdout.on('data', (data)=>{
+    console.log(data); 
+  });
+
+  res.sendFile(__dirname + '/php-vuln/xss.html');
+  //res.render('hello', { title: 'Hey', message: 'Hello there!', payload: payloadXss})
 })
 
 
