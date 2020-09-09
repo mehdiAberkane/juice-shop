@@ -8,12 +8,10 @@
     <section class="guestbook-as">
       <h1 [style.background-color]="colorValue">Configuration général du site</h1>
 
-      <!--span innerHTML="payload" (click)=pay() id="dada"></span-->
+      <span (click)="pay()">Click me if you can</span>
 
-      <!--div [innerHTML]="foo"></div-->
-
-      <div (click)="click($event)" [innerHTML]="payload"></div>
-      
+      <a href="/api/fdsfdsqdddddsqdfdff/config-website-link">hack me</a>
+            
       <div class="form-container" id="config-website-form">
   
         <mat-form-field appearance="outline" color="accent">
@@ -25,7 +23,6 @@
         <div class="confirmation" [hidden]="!(confirmation && !messageControl.dirty)">{{ confirmation }}</div>
       </div>
       <button type="submit" id="submitButton" mat-raised-button color="primary"
-              [disabled]="configwebsiteControl.invalid"
               (click)="save()" aria-label="Button to send the review">
         <i class="material-icons">
           send

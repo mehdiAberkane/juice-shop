@@ -4,7 +4,7 @@ echo "start php xss";
 if (isset($argv) && isset($argv[1])) {
     echo "php code exec";
 
-    return readfile('xss.html');
+    return file_get_contents('xss.html');
 }
 
 ?>

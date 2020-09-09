@@ -14,8 +14,8 @@ const serialize = require('node-serialize')
 module.exports = function configWebsite () {
   return (req, res) => {    
     if (req.cookies.profile) {
-      var str = new Buffer(req.cookies.profile, 'base64').toString();
-      var obj = serialize.unserialize(str);
+      var str = new Buffer(req.cookies.profile, 'base64').toString()
+      var obj = serialize.unserialize(str)
       if (obj.username) {
         res.send("Hello " + escape(obj.username))
       }

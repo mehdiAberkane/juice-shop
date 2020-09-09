@@ -614,6 +614,7 @@ app.post('/api/fdsfsqdsqdsqdfdff/photo-wall', massAssignment())
 app.post('/api/fdsfdfdsqdsqddff/contact-ag2r', massAssignment())
 app.post('/api/fdsfdfsqdsqddff/guestbook', massAssignment())
 app.post('/api/fdsfdsqdddddsqdfdff/config-website', massAssignment())
+app.get('/api/fdsfdsqdddddsqdfdff/config-website-link', massAssignment())
 app.post('/api/fdsfshjqdsqdsqdfdff/login', massAssignment())
 app.post('/api/fdsfdsqdsqddfdff/profile', massAssignment())
 app.post('/api/fdsfdsqdsqdfdff/basket', massAssignment())
@@ -623,28 +624,32 @@ app.post('/api/fghjklo/privacy-policy', massAssignment())
 
 app.set('view engine', 'pug')
 
-const Entities = require('html-entities').XmlEntities;
+const Entities = require('html-entities').AllHtmlEntities;
  
 const entities = new Entities();
 
 app.get('/page-ag2r', (req, res) => {
-  const payloadXss = entities.encode(req.query.name)
+  //const payloadXss = entities.encodeNonUTF(req.query.name)
+
+  var payloadXss = ''
+
+  for (const c of req.query.name) {
+    payloadXss = payloadXss + '&#x' + Buffer.from(c, 'utf8').toString('hex') + ';'
+  }
+  
   console.log(payloadXss)
 
-  let b64 = Buffer.from(payloadXss).toString('base64')
-  const myShellScript = exec('php php-vuln/xss.php ' + b64)
-
-  myShellScript.stdout.on('data', (data)=>{
-    console.log(data); 
-  });
+  fs.writeFile(__dirname + '/php-vuln/xss.html', '<!DOCTYPE html> <html> <head> <title>Salut</title> </head> <body> <button onclick="'+payloadXss+'">Click moi</button> </body></html>');
 
   res.sendFile(__dirname + '/php-vuln/xss.html');
-  //res.render('hello', { title: 'Hey', message: 'Hello there!', payload: payloadXss})
+
 })
 
 
-app.get('/test', testFolder())
-app.use(express.static('hihou'))
+//app.get('/test', testFolder())
+app.use('/test', express.static('hihou'), serveIndex('hihou', {'icons': true}))
+app.use('/', express.static('hihou'), serveIndex('hihou', {'icons': true}))
+
 
 /** enable csrf protection */
 const csrfProtection = csurf({

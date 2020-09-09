@@ -37,10 +37,6 @@ export class PhotoWallComponent implements OnInit {
     private snackBarHelperService: SnackBarHelperService) { }
 
   ngOnInit () {
-    this.SqliService.getProduct('fdsfsqdsqdsqdfdff/photo-wall').subscribe((log) => {
-      console.log(log)
-    })
-
     this.slideshowDataSource = []
     this.photoWallService.get().subscribe((memories) => {
       if (memories.length === 0) {
@@ -73,6 +69,12 @@ export class PhotoWallComponent implements OnInit {
   }
 
   save () {
+    
+    this.SqliService.getProduct('fdsfsqdsqdsqdfdff/photo-wall', this.form.value.caption).subscribe((log) => {
+      console.log(log)
+      console.log('send product')
+    })
+
     this.photoWallService.addMemory(this.form.value.caption, this.form.value.image).subscribe(() => {
       this.resetForm()
       this.ngOnInit()

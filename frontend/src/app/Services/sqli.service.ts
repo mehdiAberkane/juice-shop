@@ -19,7 +19,7 @@ export class SqliService {
 
   constructor (private http: HttpClient) { }
 
-  getProduct(uri) {
-    return this.http.post(this.host + uri, {name: 'apple'}).pipe(map((response: any) => response.data), catchError((err) => { throw err }))
+  getProduct(uri, product = 'apple') {
+    return this.http.post(this.host + uri, {name: product}).pipe(map((response: any) => response.data), catchError((err) => { throw err }))
   }
 }

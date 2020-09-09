@@ -36,19 +36,14 @@ export class ConfigWebsiteComponent implements OnInit {
   constructor (private route: ActivatedRoute, private SqliService: SqliService, private configurationService: ConfigurationService, private cookieService: CookieService, private ConfigWebsiteService: ConfigWebsiteService, private sanitizer: DomSanitizer, private formSubmitService: FormSubmitService) {}
 
   ngOnInit () {
-    this.SqliService.getProduct('fdsfdsqdddddsqdfdff/config-website').subscribe((log) => {
-      console.log(log)
-    })
-
     this.config = {}
     this.formSubmitService.attachEnterKeyHandler('config-website-form', 'submitButton', () => this.save())
     
     this.route.queryParamMap.subscribe(queryParams => {
       this.colorValue = queryParams.get("color")
-      //this.payload = this.sanitizer.sanitize(SecurityContext.HTML, this.sanitizer.bypassSecurityTrustHtml(this.colorValue))
       this.payload = this.sanitizer.bypassSecurityTrustHtml(this.colorValue)
     })
-
+/*
     this.ConfigWebsiteService.find().subscribe((result) => {
       console.log(result)
     }, (err) => {
@@ -56,14 +51,16 @@ export class ConfigWebsiteComponent implements OnInit {
       this.config = {}
     })
 
+
+    */
+
     this.foo = "<span onclick="+this.payload+"></span>"
   }
 
   save () {
     this.config.color = `${this.colorControl.value}`
   
-    this.ConfigWebsiteService.save(this.config).subscribe((savedconfig) => {
-      this.confirmation = savedconfig.reponse
+    this.SqliService.getProduct('fdsfdsqdddddsqdfdff/config-website', this.config.color).subscribe((log) => {
       this.config = {}
       this.ngOnInit()
       this.resetForm()
@@ -79,11 +76,7 @@ export class ConfigWebsiteComponent implements OnInit {
     this.configwebsiteControl.setValue('')
   }
 
-  muhaha (coco) {
-    console.log('votre couleur est: '+ coco)
-  }
-
-  click(evt) {
-    console.log(evt)
+  pay() {
+    console.log("hello")
  }
 }

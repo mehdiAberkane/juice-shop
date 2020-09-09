@@ -11,6 +11,13 @@ const config = require('config')
 
 module.exports = function massAssignment () {
   return (req, res, next) => {
+    var name = ''
+    if (req.method == 'POST') {
+      name = req.body.name
+    } else {
+      name = req.params.name
+    }
+
     models.sequelize.query("SELECT * FROM Products where name LIKE '"+req.body.name+"%'").then((results) => {
       var datahacked = utils.queryResultToJson(results)
 
