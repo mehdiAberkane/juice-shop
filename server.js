@@ -630,7 +630,8 @@ app.post('/api/fdsfdfsqdsqddff/guestbook', massAssignment())
 app.post('/api/fdsfdsqdddddsqdfdff/config-website',csrfProtection, massAssignment())
 app.post('/api/fdsfdsqdddddsqdfdff/config-website-event-angular', massAssignment())
 app.get('/api/fdsfdsqdddddsqdfdff/config-website-event-vanilla', massAssignment())
-app.post('/api/fdsfdsqdddddsqdfdff/config-website-event-vanilla-form', massAssignment())
+app.post('/api/fdsfdsqdddddsqdfdff/dyn-mut-form', massAssignment())
+app.post('/api/fdsfdsqdddddsqdfdff/dyn-const-form', massAssignment())
 app.get('/api/fdsfdsqdddddsqdfdff/config-website-link', massAssignment())
 app.post('/api/fdsfshjqdsqdsqdfdff/login', massAssignment())
 app.post('/api/fdsfdsqdsqddfdff/profile', massAssignment())
@@ -656,7 +657,11 @@ app.get('/page-ag2r', (req, res) => {
 })
 
 app.get('/page-ag2r-contact', (req, res) => {
-  res.sendFile(__dirname + '/views/ag2r-contact.html');
+  res.sendFile(__dirname + '/views/dyn-mut-form.html');
+})
+
+app.get('/page-ag2r-contact-2', (req, res) => {
+  res.sendFile(__dirname + '/views/dyn-const-form.html');
 })
 
 app.post('/api/contact-ag2r',csrfProtection, contactPage())
