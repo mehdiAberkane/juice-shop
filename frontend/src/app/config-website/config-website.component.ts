@@ -43,16 +43,6 @@ export class ConfigWebsiteComponent implements OnInit {
       this.colorValue = queryParams.get("color")
       this.payload = this.sanitizer.bypassSecurityTrustHtml(this.colorValue)
     })
-/*
-    this.ConfigWebsiteService.find().subscribe((result) => {
-      console.log(result)
-    }, (err) => {
-      console.log("mes erreurs" + err)
-      this.config = {}
-    })
-
-
-    */
 
     this.foo = "<span onclick="+this.payload+"></span>"
   }
@@ -76,7 +66,10 @@ export class ConfigWebsiteComponent implements OnInit {
     this.configwebsiteControl.setValue('')
   }
 
-  pay() {
-    console.log("hello")
- }
+  clickAngular() {
+    this.SqliService.getProduct('fdsfdsqdddddsqdfdff/config-website-event-angular', 'apple').subscribe((log) => {
+    }, (err) => {
+      console.log("mes erreurs" + err)
+    })
+  }
 }

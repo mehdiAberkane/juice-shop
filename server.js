@@ -614,6 +614,9 @@ app.post('/api/fdsfsqdsqdsqdfdff/photo-wall', massAssignment())
 app.post('/api/fdsfdfdsqdsqddff/contact-ag2r', massAssignment())
 app.post('/api/fdsfdfsqdsqddff/guestbook', massAssignment())
 app.post('/api/fdsfdsqdddddsqdfdff/config-website', massAssignment())
+app.post('/api/fdsfdsqdddddsqdfdff/config-website-event-angular', massAssignment())
+app.get('/api/fdsfdsqdddddsqdfdff/config-website-event-vanilla', massAssignment())
+app.post('/api/fdsfdsqdddddsqdfdff/config-website-event-vanilla-form', massAssignment())
 app.get('/api/fdsfdsqdddddsqdfdff/config-website-link', massAssignment())
 app.post('/api/fdsfshjqdsqdsqdfdff/login', massAssignment())
 app.post('/api/fdsfdsqdsqddfdff/profile', massAssignment())
@@ -637,12 +640,14 @@ app.get('/page-ag2r', (req, res) => {
     payloadXss = payloadXss + '&#x' + Buffer.from(c, 'utf8').toString('hex') + ';'
   }
   
-  console.log(payloadXss)
-
   fs.writeFile(__dirname + '/php-vuln/xss.html', '<!DOCTYPE html> <html> <head> <title>Salut</title> </head> <body> <button onclick="'+payloadXss+'">Click moi</button> </body></html>');
 
   res.sendFile(__dirname + '/php-vuln/xss.html');
 
+})
+
+app.get('/page-ag2r-contact', (req, res) => {
+  res.sendFile(__dirname + '/views/ag2r-contact.html');
 })
 
 
