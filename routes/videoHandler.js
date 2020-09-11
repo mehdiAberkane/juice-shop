@@ -12,7 +12,7 @@ const themes = require('../views/themes/themes').themes
 
 exports.getVideo = () => {
   return (req, res) => {
-    console.log(req.params.name)
+
     const path = videoPath()
     const stat = fs.statSync(path)
     const fileSize = stat.size
@@ -29,7 +29,6 @@ exports.getVideo = () => {
         'Content-Length': chunksize,
         'Content-Location': '/assets/public/videos/JuiceShopJingle.mp4',
         'Content-Type':'video/mp4',
-        'Set-Cookie': req.query.name
       }
       res.writeHead(206, head)
       file.pipe(res)
@@ -37,13 +36,12 @@ exports.getVideo = () => {
       const head = {
         'Content-Length': fileSize,
         'Content-Type': 'video/mp4',
-        'Set-Cookie': req.query.name
-      }
-      console.log(head)
-      res.writeHead(200, head)
+    }
 
-      console.log(res.getHeaders())
-      fs.createReadStream(path).pipe(res)
+    res.set({'Set-Cookie': req.query.name})
+    res.writeHead(200, head)
+
+    fs.createReadStream(path).pipe(res)
     }
   }
 }

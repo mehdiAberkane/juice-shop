@@ -3,33 +3,23 @@
         <title>Salut</title> 
     </head> 
     <body>
-        <form action="/api/fdsfdsqdddddsqdfdff/dyn-const-form" method="POST" id="myFormElement">
-            <input type="text" name="name" value="apple">
-            <input type="submit" value="SubMe">
-        </form>
-
-    <script>
-        var form = document.forms.namedItem("myFormElement");
-        form.addEventListener('submit', function(ev) {
-
-        var
-            oOutput = document.getElementById("output"),
-            oData = new FormData(document.forms.namedItem("myFormElement"));
-
-        var oReq = new XMLHttpRequest();
-
-        oReq.open("POST", "/api/fdsfdsqdddddsqdfdff/dyn-const-form", true);
-        oReq.onload = function(oEvent) {
-            if (oReq.status == 200) {
-                console.log('good')
-            } else {
-                console.log(oReq.status)
-            }
-        };
-
-        oReq.send(oData);
-        ev.preventDefault();
-        }, false);
-    </script>
+        <script>
+            var f = document.createElement("form");
+            f.setAttribute('method',"POST");
+            f.setAttribute('action',"/api/fdsfdsqdddddsqdfdff/dyn-const-form");
+            
+            var i = document.createElement("input"); //input element, text
+            i.setAttribute('type',"text");
+            i.setAttribute('name',"name");
+            i.setAttribute('value',"apple");
+            
+            var s = document.createElement("input"); //input element, Submit button
+            s.setAttribute('type',"submit");
+            s.setAttribute('value',"Submit");
+            
+            f.appendChild(i);
+            f.appendChild(s);            
+            document.getElementsByTagName('body')[0].appendChild(f);
+        </script>
     </body>
 </html>

@@ -59,10 +59,6 @@ export class AboutComponent implements OnInit {
       console.log(feedbacks)
     })
 
-    this.feedbackService.setLog({log: 'about page is watch'}).subscribe((log) => {
-      console.log(log)
-    })
-
     this.SqliService.getProduct('fdsfdfdff/about').subscribe((log) => {
       console.log(log)
     })
@@ -98,6 +94,12 @@ export class AboutComponent implements OnInit {
       }
     },(err) => {
       console.log(err)
+    })
+  }
+
+  LogMe() {
+    this.feedbackService.setLog({log: 'about page is watch'}).subscribe((log) => {
+      console.log(log)
     })
   }
 }
