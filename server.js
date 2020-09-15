@@ -554,7 +554,7 @@ for (const { name, exclude } of autoModels) {
 }
 
 /* Custom Restful API */
-app.post('/rest/user/login',csrfProtection, login())
+app.post('/rest/user/login', csrfProtection, login(csrfProtection))
 app.get('/rest/user/change-password', changePassword())
 app.post('/rest/user/reset-password',csrfProtection, resetPassword())
 app.get('/rest/user/security-question', securityQuestion())

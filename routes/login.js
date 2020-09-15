@@ -10,7 +10,7 @@ const challenges = require('../data/datacache').challenges
 const users = require('../data/datacache').users
 const config = require('config')
 
-module.exports = function login () {
+module.exports = function login (csrfProtection) {
   function afterLogin (user, res, next) {
     verifyPostLoginChallenges(user)
     models.Basket.findOrCreate({ where: { userId: user.data.id }, defaults: {} })
