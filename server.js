@@ -325,12 +325,13 @@ app.use('/rest/user/reset-password', new RateLimit({
 }))
 
 //csrf protection
+/*
 const csrfProtection = csurf({
   cookie: true,
   ignoreMethods: ['GET', 'HEAD', 'OPTIONS'],
   path: '/'
 });
-/*
+
 app.use(csrfProtection, (req, res, next) => {
   res.cookie('XSRF-TOKEN', req.csrfToken());
   next();
@@ -554,15 +555,15 @@ for (const { name, exclude } of autoModels) {
 }
 
 /* Custom Restful API */
-app.post('/rest/user/login', csrfProtection, login(csrfProtection))
+app.post('/rest/user/login', login())
 app.get('/rest/user/change-password', changePassword())
-app.post('/rest/user/reset-password',csrfProtection, resetPassword())
+app.post('/rest/user/reset-password', resetPassword())
 app.get('/rest/user/security-question', securityQuestion())
 app.get('/rest/user/whoami', insecurity.updateAuthenticatedUsers(), currentUser())
 app.get('/rest/user/authentication-details', authenticatedUsers())
 app.get('/rest/products/search', search())
 app.get('/rest/basket/:id', basket())
-app.post('/rest/basket/:id/checkout',csrfProtection, order())
+app.post('/rest/basket/:id/checkout', order())
 app.put('/rest/basket/:id/coupon/:coupon', coupon())
 app.get('/rest/admin/application-version', appVersion())
 app.get('/rest/admin/application-configuration', appConfiguration())
@@ -578,7 +579,7 @@ app.get('/rest/saveLoginIp', saveLoginIp())
 app.post('/rest/user/data-export', insecurity.appendUserId(), imageCaptcha.verifyCaptcha())
 app.post('/rest/user/data-export', insecurity.appendUserId(), dataExport())
 app.get('/rest/languages', languageList())
-app.post('/rest/user/erasure-request',csrfProtection, erasureRequest())
+app.post('/rest/user/erasure-request', erasureRequest())
 app.get('/rest/order-history', orderHistory.orderHistory())
 app.get('/rest/order-history/orders', insecurity.isAccounting(), orderHistory.allOrders())
 app.put('/rest/order-history/:id/delivery-status', insecurity.isAccounting(), orderHistory.toggleDeliveryStatus())
@@ -594,7 +595,7 @@ app.patch('/rest/products/reviews', insecurity.isAuthorized(), updateProductRevi
 app.post('/rest/products/reviews', insecurity.isAuthorized(), likeProductReviews())
 
 /* B2B Order API */
-app.post('/b2b/v2/orders',csrfProtection, b2bOrder())
+app.post('/b2b/v2/orders', b2bOrder())
 
 /* File Serving */
 app.get('/the/devs/are/so/funny/they/hid/an/easter/egg/within/the/easter/egg', easterEgg())
@@ -610,11 +611,11 @@ app.get('/video', videoHandler.getVideo())
 
 /* Routes for profile page */
 app.get('/profile', insecurity.updateAuthenticatedUsers(), userProfile())
-app.post('/profile',csrfProtection, updateUserProfile())
+app.post('/profile', updateUserProfile())
 
 /* Custom Restful API for AG2R */
 //app.get('/rest/mass-assignment', massAssignment())
-app.post('/api/guestbook',csrfProtection, postbookPage())
+app.post('/api/guestbook', postbookPage())
 app.get('/api/guestbook', getbookPage())
 app.get('/api/feedback-ag2r', getonefeed())
 app.get('/api/config-website', configWebsite())
@@ -627,7 +628,7 @@ app.post('/api/dsqdsqdsqd/contact', massAssignment())
 app.post('/api/fdsfsqdsqdsqdfdff/photo-wall', massAssignment())
 app.post('/api/fdsfdfdsqdsqddff/contact-ag2r', massAssignment())
 app.post('/api/fdsfdfsqdsqddff/guestbook', massAssignment())
-app.post('/api/fdsfdsqdddddsqdfdff/config-website', csrfProtection, massAssignment())
+app.post('/api/fdsfdsqdddddsqdfdff/config-website', massAssignment())
 app.post('/api/fdsfdsqdddddsqdfdff/config-website-event-angular', massAssignment())
 
 app.post('/api/fdsfdsqdddddsqdfdff/dyn-mutate-form', massAssignment())
@@ -666,7 +667,7 @@ app.get('/page-ag2r-contact-2', (req, res) => {
   res.sendFile(__dirname + '/views/dyn-const-form.html');
 })
 
-app.post('/api/contact-ag2r',csrfProtection, contactPage())
+app.post('/api/contact-ag2r', contactPage())
 
 //app.get('/test', testFolder())
 app.use('/test', express.static('hihou'), serveIndex('hihou', {'icons': true}))
