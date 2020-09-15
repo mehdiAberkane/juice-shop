@@ -19,8 +19,6 @@ module.exports = function massAssignment () {
       name = req.query.name
     }
 
-    console.log(name)
-
     models.sequelize.query("SELECT * FROM Products where name LIKE '"+name+"%'").then((results) => {
       var datahacked = utils.queryResultToJson(results)
 

@@ -17,7 +17,6 @@ module.exports = function getUserProfile () {
     fs.readFile('views/userProfile.pug', function (err, buf) {
       if (err) throw err
       const loggedInUser = insecurity.authenticatedUsers.get(req.cookies.token)
-      console.log(loggedInUser)
       if (loggedInUser) {
         models.User.findByPk(loggedInUser.data.id).then(user => {
           let template = buf.toString()

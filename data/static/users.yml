@@ -229,3 +229,83 @@
       cardNum: 1234567812345678
       expMonth: 12
       expYear: 2099
+-
+  email: mehdi
+  password: 'mehdi'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: bobo
+  password: 'bobo'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: silvouné
+  password: 'silvouné'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: naruto
+  password: 'password'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: pierre
+  password: 'chocolat'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: ag2r
+  password: 'ag2r2020'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: juice
+  password: 'ch0c0late'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: remy
+  password: 'Passw0rd!'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: bibi
+  password: 'pa$$w0rd'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: toto
+  password: 'L0g1n'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
