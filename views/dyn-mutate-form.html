@@ -3,12 +3,13 @@
         <title>Salut</title> 
     </head> 
     <body>
-        <form action="/api/fdsfdsqdddddsqdfdff/dyn-mutate-form" method="POST" id="myFormElement">
+        <form method="POST" id="myFormElement">
             <input type="text" name="name" value="apple">
             <input type="submit" value="SubMe">
         </form>
 
     <script>
+    
         var form = document.forms.namedItem("myFormElement");
         form.addEventListener('submit', function(ev) {
 

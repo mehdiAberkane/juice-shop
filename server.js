@@ -654,6 +654,8 @@ app.get('/page-ag2r', (req, res) => {
   }
   
   fs.writeFile(__dirname + '/php-vuln/xss.html', '<!DOCTYPE html> <html> <head> <title>Salut</title> </head> <body> <button onclick="'+payloadXss+'">Click moi</button> </body></html>');
+  
+  //sleeep
 
   res.sendFile(__dirname + '/php-vuln/xss.html');
 
@@ -670,7 +672,7 @@ app.get('/page-ag2r-contact-2', (req, res) => {
 app.post('/api/contact-ag2r', contactPage())
 
 //app.get('/test', testFolder())
-app.use('/test', express.static('hihou'), serveIndex('hihou', {'icons': true}))
+//app.use('/test', express.static('hihou'), serveIndex('hihou', {'icons': true}))
 app.use('/', express.static('hihou'), serveIndex('hihou', {'icons': true}))
 
 app.use(angular())
