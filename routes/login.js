@@ -10,7 +10,7 @@ const challenges = require('../data/datacache').challenges
 const users = require('../data/datacache').users
 const config = require('config')
 
-module.exports = function login (csrfProtection) {
+module.exports = function login () {
   function afterLogin (user, res, next) {
     verifyPostLoginChallenges(user)
     models.Basket.findOrCreate({ where: { userId: user.data.id }, defaults: {} })
@@ -49,7 +49,15 @@ module.exports = function login (csrfProtection) {
         } else if (user.data && user.data.id) {
           afterLogin(user, res, next)
         } else {
-          res.status(401).send(res.__('Invalid email or password.'))
+          models.sequelize.query(`SELECT * FROM Users WHERE email = '${req.body.email || ''}'`, { model: models.User, plain: true })
+          .then((UserExist) => {
+            if (UserExist) {
+              res.status(401).send(res.__('Invalid password.'))
+            } else {
+              res.status(401).send(res.__('Invalid email or password.'))
+            }
+          })
+
         }
       }).catch(error => {
         next(error)
