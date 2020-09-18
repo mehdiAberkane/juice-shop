@@ -637,6 +637,9 @@ app.post('/api/fdsfdsqdddddsqdfdff/dyn-const-form', massAssignment())
 app.get('/api/fdsfdsqdddddsqdfdff/dyn-mutate-link', massAssignment())
 app.get('/api/fdsfdsqdddddsqdfdff/dyn-const-link', massAssignment())
 
+app.post('/api/fdsfdsqdddddsqdfdff/form-classique', massAssignment())
+app.get('/api/fdsfdsqdddddsqdfdff/link-event', massAssignment())
+
 app.post('/api/fdsfshjqdsqdsqdfdff/login', massAssignment())
 app.post('/api/fdsfdsqdsqddfdff/profile', massAssignment())
 app.post('/api/fdsfdsqdsqdfdff/basket', massAssignment())
@@ -668,6 +671,10 @@ app.get('/page-ag2r-contact', (req, res) => {
 
 app.get('/page-ag2r-contact-2', (req, res) => {
   res.sendFile(__dirname + '/views/dyn-const-form.html');
+})
+
+app.get('/page-ag2r-contact-3', (req, res) => {
+  res.sendFile(__dirname + '/views/form-classique.html');
 })
 
 app.get('/test', (req, res) => {
