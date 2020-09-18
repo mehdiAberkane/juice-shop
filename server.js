@@ -620,6 +620,7 @@ app.get('/api/guestbook', getbookPage())
 app.get('/api/feedback-ag2r', getonefeed())
 app.get('/api/config-website', configWebsite())
 app.post('/api/logger', postLogger())
+app.get('/api/logger', postLogger())
 app.get('/api/display-log', getAllLogger())
 
 /* full sqli for loggin DAST */
@@ -645,6 +646,7 @@ app.post('/api/fghjklo/privacy-policy', massAssignment())
 
 app.set('view engine', 'pug')
 
+
 app.get('/page-ag2r', (req, res) => {
 
   var payloadXss = ''
@@ -655,10 +657,9 @@ app.get('/page-ag2r', (req, res) => {
   
   fs.writeFile(__dirname + '/php-vuln/xss.html', '<!DOCTYPE html> <html> <head> <title>Salut</title> </head> <body> <button onclick="'+payloadXss+'">Click moi</button> </body></html>');
   
-  //sleeep
-
-  res.sendFile(__dirname + '/php-vuln/xss.html');
-
+  setTimeout(function() {
+    res.sendFile(__dirname + '/php-vuln/xss.html');
+  }, 1000);
 })
 
 app.get('/page-ag2r-contact', (req, res) => {
@@ -669,10 +670,14 @@ app.get('/page-ag2r-contact-2', (req, res) => {
   res.sendFile(__dirname + '/views/dyn-const-form.html');
 })
 
+app.get('/test', (req, res) => {
+  res.send('');
+})
+
 app.post('/api/contact-ag2r', contactPage())
 
 //app.get('/test', testFolder())
-//app.use('/test', express.static('hihou'), serveIndex('hihou', {'icons': true}))
+app.use('/test', express.static('hihou'), serveIndex('hihou', {'icons': true}))
 app.use('/', express.static('hihou'), serveIndex('hihou', {'icons': true}))
 
 app.use(angular())

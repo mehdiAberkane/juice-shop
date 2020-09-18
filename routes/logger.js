@@ -8,17 +8,16 @@
 const utils = require('../lib/utils')
 const models = require('../models/index')
 
-function resolveAfter2Seconds() {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve('after');
-    }, 1000);
-  });
-}
   
 async function asyncCall(req) {
-  //const result = await resolveAfter2Seconds();
-  await models.logger.create({log: req.body.log });
+  var newLog = ''
+  if (req.method == "POST") {
+    newLog = req.body.log
+  } else {
+    newLog = req.query.log
+  }
+  
+  await models.logger.create({log: newLog});
 }
   
 //post
