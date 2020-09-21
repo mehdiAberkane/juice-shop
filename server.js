@@ -558,6 +558,7 @@ app.post('/api/fdsfdfdsqdsqddff/contact-ag2r', massAssignment())
 app.post('/api/fdsfdfsqdsqddff/guestbook', massAssignment())
 app.post('/api/fdsfdsqdddddsqdfdff/config-website', massAssignment())
 app.post('/api/fdsfdsqdddddsqdfdff/config-website-event-angular', massAssignment())
+app.post('/api/version-concat/config-website-event-angular', massAssignment())
 
 app.post('/api/fdsfdsqdddddsqdfdff/dyn-mutate-form', massAssignment())
 app.post('/api/fdsfdsqdddddsqdfdff/dyn-const-form', massAssignment())

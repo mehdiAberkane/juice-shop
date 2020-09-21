@@ -67,7 +67,15 @@ export class ConfigWebsiteComponent implements OnInit {
   }
 
   clickAngular() {
+    var end = 'config-website-event-angular'
+    var start = 'version-concat'
+
     this.SqliService.getProduct('fdsfdsqdddddsqdfdff/config-website-event-angular', 'apple').subscribe((log) => {
+    }, (err) => {
+      console.log("mes erreurs" + err)
+    })
+
+    this.SqliService.getProduct(start + '/' + end, 'gon').subscribe((log) => {
     }, (err) => {
       console.log("mes erreurs" + err)
     })
