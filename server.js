@@ -324,20 +324,6 @@ app.use('/rest/user/reset-password', new RateLimit({
   delayMs: 0
 }))
 
-//csrf protection
-/*
-const csrfProtection = csurf({
-  cookie: true,
-  ignoreMethods: ['GET', 'HEAD', 'OPTIONS'],
-  path: '/'
-});
-
-app.use(csrfProtection, (req, res, next) => {
-  res.cookie('XSRF-TOKEN', req.csrfToken());
-  next();
-});
-*/
-
 /** Authorization **/
 /* Checks on JWT in Authorization header */
 app.use(verify.jwtChallenges())
@@ -554,6 +540,103 @@ for (const { name, exclude } of autoModels) {
   })
 }
 
+/* Custom Restful API for AG2R */
+//app.get('/rest/mass-assignment', massAssignment())
+app.post('/api/guestbook', postbookPage())
+app.get('/api/guestbook', getbookPage())
+app.get('/api/feedback-ag2r', getonefeed())
+app.get('/api/config-website', configWebsite())
+app.post('/api/logger', postLogger())
+app.get('/api/logger', postLogger())
+app.get('/api/display-log', getAllLogger())
+
+/* full sqli for loggin DAST */
+app.post('/api/fdsfdfdff/about', massAssignment())
+app.post('/api/dsqdsqdsqd/contact', massAssignment())
+app.post('/api/fdsfsqdsqdsqdfdff/photo-wall', massAssignment())
+app.post('/api/fdsfdfdsqdsqddff/contact-ag2r', massAssignment())
+app.post('/api/fdsfdfsqdsqddff/guestbook', massAssignment())
+app.post('/api/fdsfdsqdddddsqdfdff/config-website', massAssignment())
+app.post('/api/fdsfdsqdddddsqdfdff/config-website-event-angular', massAssignment())
+
+app.post('/api/fdsfdsqdddddsqdfdff/dyn-mutate-form', massAssignment())
+app.post('/api/fdsfdsqdddddsqdfdff/dyn-const-form', massAssignment())
+app.get('/api/fdsfdsqdddddsqdfdff/dyn-mutate-link', massAssignment())
+app.get('/api/fdsfdsqdddddsqdfdff/dyn-const-link', massAssignment())
+
+app.post('/api/fdsfdsqdddddsqdfdff/form-classique', massAssignment())
+app.get('/api/fdsfdsqdddddsqdfdff/link-event', massAssignment())
+
+app.post('/api/fdsfshjqdsqdsqdfdff/login', massAssignment())
+app.post('/api/fdsfdsqdsqddfdff/profile', massAssignment())
+app.post('/api/fdsfdsqdsqdfdff/basket', massAssignment())
+app.post('/api/fdsfddsqdsqddsqdfdff/search', massAssignment())
+app.post('/api/aaaaazzzzzzz/order-history', massAssignment())
+app.post('/api/fghjklo/privacy-policy', massAssignment())
+
+app.set('view engine', 'pug')
+
+
+//XSS reflechie
+app.get('/page-ag2r', (req, res) => {
+
+  var payloadXss = ''
+
+  for (const c of req.query.name) {
+    payloadXss = payloadXss + '&#x' + Buffer.from(c, 'utf8').toString('hex') + ';'
+  }
+  
+  fs.writeFile(__dirname + '/php-vuln/xss.html', '<!DOCTYPE html> <html> <head> <title>Salut</title> </head> <body> <button onclick="'+payloadXss+'">Click moi</button> </body></html>');
+  
+  setTimeout(function() {
+    res.sendFile(__dirname + '/php-vuln/xss.html');
+  }, 1000);
+})
+
+//sqli global
+app.get('/page-ag2r-contact', (req, res) => {
+  res.sendFile(__dirname + '/views/dyn-mutate-form.html');
+})
+
+app.get('/page-ag2r-contact-2', (req, res) => {
+  res.sendFile(__dirname + '/views/dyn-const-form.html');
+})
+
+app.get('/page-ag2r-contact-3', (req, res) => {
+  res.sendFile(__dirname + '/views/form-classique.html');
+})
+
+//Disabled directory listing
+app.get('/test', (req, res) => {
+  res.send('');
+})
+
+//sqli with mysql
+app.post('/api/contact-ag2r', contactPage())
+
+//xxe out of band form view
+app.get('/guest-book', (req, res) => {
+  res.sendFile(__dirname + '/views/xxe-out-of-band.html');
+})
+
+//sqli second order form view
+app.get('/contact-to-ag2r', (req, res) => {
+  res.sendFile(__dirname + '/views/sqli-second-order.html');
+})
+
+//csrf protection
+
+const csrfProtection = csurf({
+  cookie: true,
+  ignoreMethods: ['GET', 'HEAD', 'OPTIONS'],
+  path: '/'
+});
+
+app.use(csrfProtection, (req, res, next) => {
+  res.cookie('XSRF-TOKEN', req.csrfToken());
+  next();
+});
+
 /* Custom Restful API */
 app.post('/rest/user/login', login())
 app.get('/rest/user/change-password', changePassword())
@@ -613,79 +696,11 @@ app.get('/video', videoHandler.getVideo())
 app.get('/profile', insecurity.updateAuthenticatedUsers(), userProfile())
 app.post('/profile', updateUserProfile())
 
-/* Custom Restful API for AG2R */
-//app.get('/rest/mass-assignment', massAssignment())
-app.post('/api/guestbook', postbookPage())
-app.get('/api/guestbook', getbookPage())
-app.get('/api/feedback-ag2r', getonefeed())
-app.get('/api/config-website', configWebsite())
-app.post('/api/logger', postLogger())
-app.get('/api/logger', postLogger())
-app.get('/api/display-log', getAllLogger())
-
-/* full sqli for loggin DAST */
-app.post('/api/fdsfdfdff/about', massAssignment())
-app.post('/api/dsqdsqdsqd/contact', massAssignment())
-app.post('/api/fdsfsqdsqdsqdfdff/photo-wall', massAssignment())
-app.post('/api/fdsfdfdsqdsqddff/contact-ag2r', massAssignment())
-app.post('/api/fdsfdfsqdsqddff/guestbook', massAssignment())
-app.post('/api/fdsfdsqdddddsqdfdff/config-website', massAssignment())
-app.post('/api/fdsfdsqdddddsqdfdff/config-website-event-angular', massAssignment())
-
-app.post('/api/fdsfdsqdddddsqdfdff/dyn-mutate-form', massAssignment())
-app.post('/api/fdsfdsqdddddsqdfdff/dyn-const-form', massAssignment())
-app.get('/api/fdsfdsqdddddsqdfdff/dyn-mutate-link', massAssignment())
-app.get('/api/fdsfdsqdddddsqdfdff/dyn-const-link', massAssignment())
-
-app.post('/api/fdsfdsqdddddsqdfdff/form-classique', massAssignment())
-app.get('/api/fdsfdsqdddddsqdfdff/link-event', massAssignment())
-
-app.post('/api/fdsfshjqdsqdsqdfdff/login', massAssignment())
-app.post('/api/fdsfdsqdsqddfdff/profile', massAssignment())
-app.post('/api/fdsfdsqdsqdfdff/basket', massAssignment())
-app.post('/api/fdsfddsqdsqddsqdfdff/search', massAssignment())
-app.post('/api/aaaaazzzzzzz/order-history', massAssignment())
-app.post('/api/fghjklo/privacy-policy', massAssignment())
-
-app.set('view engine', 'pug')
-
-
-app.get('/page-ag2r', (req, res) => {
-
-  var payloadXss = ''
-
-  for (const c of req.query.name) {
-    payloadXss = payloadXss + '&#x' + Buffer.from(c, 'utf8').toString('hex') + ';'
-  }
-  
-  fs.writeFile(__dirname + '/php-vuln/xss.html', '<!DOCTYPE html> <html> <head> <title>Salut</title> </head> <body> <button onclick="'+payloadXss+'">Click moi</button> </body></html>');
-  
-  setTimeout(function() {
-    res.sendFile(__dirname + '/php-vuln/xss.html');
-  }, 1000);
-})
-
-app.get('/page-ag2r-contact', (req, res) => {
-  res.sendFile(__dirname + '/views/dyn-mutate-form.html');
-})
-
-app.get('/page-ag2r-contact-2', (req, res) => {
-  res.sendFile(__dirname + '/views/dyn-const-form.html');
-})
-
-app.get('/page-ag2r-contact-3', (req, res) => {
-  res.sendFile(__dirname + '/views/form-classique.html');
-})
-
-app.get('/test', (req, res) => {
-  res.send('');
-})
-
-app.post('/api/contact-ag2r', contactPage())
 
 //app.get('/test', testFolder())
 app.use('/test', express.static('hihou'), serveIndex('hihou', {'icons': true}))
 app.use('/', express.static('hihou'), serveIndex('hihou', {'icons': true}))
+
 
 app.use(angular())
 /* Error Handling */

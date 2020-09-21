@@ -309,3 +309,12 @@
   securityQuestion:
     id: 7
     answer: 'sdAffsdfrefrbgreq3423'
+
+-
+  email: fofo@email.fr
+  password: 'L0g1n'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
