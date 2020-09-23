@@ -1,6 +1,6 @@
 -
   email: admin
-  password: 'admin123'
+  password: 'letmein'
   key: admin
   role: 'admin'
   securityQuestion:
@@ -313,6 +313,198 @@
 -
   email: fofo@email.fr
   password: 'L0g1n'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: root
+  password: 'voiture'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: administrateur
+  password: 'administrateur'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: administrator
+  password: 'AG2R2020!'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: Admin
+  password: 'OWASP2020!'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: Administrateur
+  password: 'Passw0rd!'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: Administrator
+  password: 'L3tm31n!'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: Root
+  password: 'V017ur3!'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: sldfiuhsqify65780@juiceshop.com
+  password: 'sldfiuhsqify65780@juiceshop.com'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: sldfiuhsqify65781@juiceshop.com
+  password: 'sldfiuhsqify65781'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: sldfiuhsqify65782@juiceshop.com
+  password: 'letmein'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: sldfiuhsqify65783@juiceshop.com
+  password: 'AG2R2020!'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: sldfiuhsqify65784@juiceshop.com
+  password: 'OWASP2020!'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: sldfiuhsqify65785@juiceshop.com
+  password: 'L3tm31n!'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: sldfiuhsqify65786@juiceshop.com
+  password: 'voiture'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: sldfiuhsqify65787@juiceshop.com
+  password: 'V017ur3!'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: sldfiuhsqify65788@juiceshop.com
+  password: 'Passw0rd!'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: michael
+  password: 'michael'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: jordan
+  password: 'letmein'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: jennifer
+  password: 'L3tm31n!'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: batman
+  password: 'voiture'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: thomas
+  password: 'V017ur3!'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: robert
+  password: 'Passw0rd!'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: superman
+  password: 'AG2R2020!'
+  key: accountant
+  role: 'accounting'
+  securityQuestion:
+    id: 7
+    answer: 'sdAffsdfrefrbgreq3423'
+-
+  email: jessica
+  password: 'OWASP2020!'
   key: accountant
   role: 'accounting'
   securityQuestion:
