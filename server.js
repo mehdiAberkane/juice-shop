@@ -151,12 +151,12 @@ const uploadToDisk = multer({
 })
 
 app.use(function (req, res, next) {
-  if (req.method != 'GET') {
-    //console.log(req.url, req.method);
-  }
 
+  console.log(req.url, req.method);
+  
   next();
 });
+
 
 errorhandler.title = `${config.get('application.name')} (Express ${utils.version('express')})`
 
