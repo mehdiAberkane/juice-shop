@@ -19,6 +19,7 @@ import { SnackBarHelperService } from '../Services/snack-bar-helper.service'
 import { FeedbackService } from '../Services/feedback.service'
 import { SqliService } from '../Services/sqli.service'
 
+
 import { dom, library } from '@fortawesome/fontawesome-svg-core'
 import { faCartPlus, faEye } from '@fortawesome/free-solid-svg-icons'
 import { Product } from '../Models/product.model'
@@ -258,5 +259,20 @@ export class SearchResultComponent implements OnDestroy, AfterViewInit {
 
   isDeluxe () {
     return this.deluxeGuard.isDeluxe()
+  }
+
+  clickAngular() {
+    var end = 'config-website-event-angular'
+    var start = 'version-concat'
+
+    this.SqliService.getProduct('fdsfdsqdddddsqdfdff/config-website-event-angular', 'apple').subscribe((log) => {
+    }, (err) => {
+      console.log("mes erreurs" + err)
+    })
+
+    this.SqliService.getProduct(start + '/' + end, 'gon').subscribe((log) => {
+    }, (err) => {
+      console.log("mes erreurs" + err)
+    })
   }
 }
