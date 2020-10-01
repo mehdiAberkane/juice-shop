@@ -26,8 +26,14 @@ module.exports = function massAssignment () {
         status: 'Working',
         data: {reponse: datahacked.data[0]}
       })
+
     }).catch(error => {
       console.log(error)
+      
+      res.status(500).json({
+        status: 'Not Working',
+        data: {reponse: utils.queryResultToJson(error)}
+      })
     })
   }
 }

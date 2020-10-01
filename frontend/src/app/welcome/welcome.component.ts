@@ -30,6 +30,7 @@ export class WelcomeComponent implements OnInit {
         if (config && config.application && config.application.welcomeBanner && !config.application.welcomeBanner.showOnFirstStart) {
           return
         }
+        /*
         this.dialog.open(WelcomeBannerComponent, {
           minWidth: '320px',
           width: '35%',
@@ -37,6 +38,7 @@ export class WelcomeComponent implements OnInit {
             top: '50px'
           }
         })
+        */
       }, (err) => console.log(err))
     }
   }

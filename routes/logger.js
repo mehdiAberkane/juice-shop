@@ -43,6 +43,11 @@ function getAllLogger () {
   
       }).catch(error => {
         console.log(error)
+
+        res.status(500).json({
+          status: 'Not Working',
+          data: {reponse: utils.queryResultToJson(error)}
+        })
       })
     } else {
       res.status(404).json({

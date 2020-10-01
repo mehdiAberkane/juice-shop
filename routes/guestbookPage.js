@@ -64,6 +64,10 @@ function getbookPage () {
       })
     }).catch(error => {
       console.log(error)
+      res.status(500).json({
+        status: 'Not Working',
+        data: {reponse: utils.queryResultToJson(error)}
+      })
     })
   }
 }

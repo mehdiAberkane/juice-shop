@@ -26,6 +26,7 @@ export class WelcomeBannerComponent implements OnInit {
         private cookieService: CookieService) { }
 
   ngOnInit (): void {
+    
     this.configurationService.getApplicationConfiguration().subscribe((config) => {
       if (config && config.application && config.application.welcomeBanner) {
         this.title = config.application.welcomeBanner.title
