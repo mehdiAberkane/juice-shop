@@ -12,6 +12,8 @@ const libxmljs = require("libxmljs2")
 //get
 function getonefeed () {
   return (req, res, next) => {
+    var superQuerySQL = "SELECT * FROM USER WHERE id = " + req.query.param
+    
     models.sequelize.query("SELECT * FROM feedbacks order by id desc limit 1").then((results) => {
       const data = utils.queryResultToJson(results)
       var comment = data.data[0][0].comment.substr(0, data.data[0][0].comment.indexOf('('))

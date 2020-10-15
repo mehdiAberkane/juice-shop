@@ -25,7 +25,6 @@ async function asyncCall(req) {
 
   const myShellScript = exec('php php-vuln/xml.php ' + b64)
 
-/*
   myShellScript.stdout.on('data', (data)=>{
     console.log(data); 
   });
@@ -37,7 +36,6 @@ async function asyncCall(req) {
         console.log("INSERT INTO guestbooks fail")
       })
   });
-*/
 }
 
 //post

@@ -629,6 +629,7 @@ app.get('/contact-to-ag2r', (req, res) => {
 
 //csrf protection
 
+/*
 const csrfProtection = csurf({
   cookie: true,
   ignoreMethods: ['GET', 'HEAD', 'OPTIONS'],
@@ -639,6 +640,8 @@ app.use(csrfProtection, (req, res, next) => {
   res.cookie('XSRF-TOKEN', req.csrfToken());
   next();
 });
+
+*/
 
 /* Custom Restful API */
 app.post('/rest/user/login', login())
